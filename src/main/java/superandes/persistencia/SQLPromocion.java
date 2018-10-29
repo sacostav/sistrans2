@@ -1,6 +1,6 @@
 package superandes.persistencia;
 
-import java.sql.Date;
+import java.util.Date;
 import java.util.LinkedList;
 
 import javax.jdo.PersistenceManager;

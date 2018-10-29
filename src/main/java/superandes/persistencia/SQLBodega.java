@@ -94,7 +94,8 @@ public class SQLBodega {
 	
 	public int cantidadProductoXBodega(PersistenceManager pm) {
 		
-		Query q = pm.newQuery(SQL, "SELECT COUNT (*) FROM"+ pp.darTablaProductosBodega()+"INNER JOIN "+pp)
+		Query q = pm.newQuery(SQL, "SELECT COUNT (*) FROM"+ pp.darTablaProductosBodega());
+		return q.executeList().size();
 	}
  	
 }	

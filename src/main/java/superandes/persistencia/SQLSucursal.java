@@ -51,10 +51,10 @@ public class SQLSucursal {
 	 * @return El número de tuplas insertadas
 	 */
 	
-	public long adicionarSucursal (PersistenceManager pm, String idSucursal, double tamañoInstalacion, double nivelReorden, long idSupermercado) 
+	public long adicionarSucursal (PersistenceManager pm, String idSucursal, double tamañoInstalacion, String clave) 
 	{
-        Query q = pm.newQuery(SQL, "INSERT INTO " + pp.darTablaSucursal () + "(idSucursal, tamañoInstalacion, nivelReorden) values (?, ?, ?)");
-        q.setParameters(idSucursal, tamañoInstalacion, nivelReorden);
+        Query q = pm.newQuery(SQL, "INSERT INTO " + pp.darTablaSucursal () + "(idSucursal, tamañoInstalacion, clave) values (?, ?, ?)");
+        q.setParameters(idSucursal, tamañoInstalacion, clave);
         return (long) q.executeUnique();
 	}
 	
@@ -72,5 +72,12 @@ public class SQLSucursal {
 		q.setResultClass(Sucursal.class);
 		q.setParameters(idSucursal);
 		return (Sucursal) q.executeUnique();
+	}
+	
+	public List<Sucursal> darSucursales(PersistenceManager pm)
+	{
+		Query q = pm.newQuery(SQL, "SELECT * FROM" + pp.darTablaSucursal());
+		q.setResultClass(Sucursal.class);
+		return (List<Sucursal>) q.executeList();
 	}
 }

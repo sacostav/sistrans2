@@ -68,6 +68,8 @@ public class Producto implements VOProducto {
 	
 	private double precioProveedor;
 	
+	private long idProveedor;
+	
 	
 
 	//---------------------------- Constructor -----------------------------//
@@ -87,9 +89,10 @@ public class Producto implements VOProducto {
 	    this.precioProveedor = 0;
 		this.fechaVencimiento = new Date();
 		this.nivelReorden = 0;
+		this.idProveedor = 0;
 	}
 	
-	public Producto(long idProducto, String nombre, String marca, double precioUnitario, double precioUnidad, String unidad, double volumen, double peso, String codigo,  Date fechaVencimiento2, int nivelReorden, double precioProveedor)
+	public Producto(long idProducto, String nombre, String marca, double precioUnitario, double precioUnidad, String unidad, double volumen, double peso, String codigo,  Date fechaVencimiento2, int nivelReorden, double precioProveedor, long idProveedor)
 	{
 		this.idProducto = idProducto;
 		this.nombre = nombre;
@@ -103,6 +106,7 @@ public class Producto implements VOProducto {
 		this.fechaVencimiento = fechaVencimiento2;
 		this.nivelReorden = nivelReorden;
 		this.precioProveedor = precioProveedor;
+		this.idProveedor = idProveedor;
 	}
 
 	//--------------------------------- Métodos -------------------------------------//

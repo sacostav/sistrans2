@@ -20,7 +20,7 @@ public class SQLProducto {
 		this.ps = ps;
 	}
 	
-	public long registrarProducto(PersistenceManager pm, long idProducto, String nombre, String marca, double precioUnitario, double precioUnidadMedida, String unidadMed, double volumenEmpaque, double pesoEmpaque, String codigoBarras, Date fechaVencimiento, int nivelReorden, double precioProveedor)
+	public long registrarProducto(PersistenceManager pm, long idProducto, String nombre, String marca, double precioUnitario, double precioUnidadMedida, String unidadMed, double volumenEmpaque, double pesoEmpaque, String codigoBarras, Date fechaVencimiento, int nivelReorden, double precioProveedor, long idProveedor)
 	{
 		Query q = pm.newQuery(SQL, "INSERT INTO " + ps.darTablaProducto() + "(idProducto, nombre, marca, precioUnitario, precioUnidadMedida, unidadMed, volumenEmpaque, pesoEmpaque, codigoBarras, fechaVencimiento, nivelReorden, precioProveedor) values (?,?,?,?,?,?,?,?,?,?,?)");
 		q.setParameters(idProducto,nombre, marca, precioUnitario, precioUnidadMedida, unidadMed, volumenEmpaque, pesoEmpaque, codigoBarras, fechaVencimiento, nivelReorden, precioProveedor);

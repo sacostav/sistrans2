@@ -22,11 +22,11 @@ public class SQLCliente {
 		this.ps = ps;
 	}
 	
-	public long registrarCliente(PersistenceManager pm,long id, int documentoIdentificacion,int NIT, String nombre, String correo, String direccion,String tipoCliente, long idSup)
+	public long registrarCliente(PersistenceManager pm,long id, int documentoIdentificacion,int NIT, String nombre, String correo, String direccion,String tipoCliente)
 	{
 	
-		Query q = pm.newQuery(SQL, "INSERT INTO " + ps.darTablaCliente() + "(id, documentoIdentificacion, NIT, nombre, correo, direccion, tipoCliente, idSupermercado) values (?,?,?,?,?,?,?.?)");
-		q.setParameters(id, documentoIdentificacion,NIT, nombre, correo, direccion, tipoCliente, idSup);
+		Query q = pm.newQuery(SQL, "INSERT INTO " + ps.darTablaCliente() + "(id, documentoIdentificacion, NIT, nombre, correo, direccion, tipoCliente) values (?,?,?,?,?,?,?)");
+		q.setParameters(id, documentoIdentificacion,NIT, nombre, correo, direccion, tipoCliente);
 		return (long) q.executeUnique();
 	}
 	
