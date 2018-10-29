@@ -26,19 +26,23 @@ public class Proveedor implements VOProveedor{
 	
 	private double calificacionCalidad;
 	
+	private String idSucursal;
+	
 	//---------------------------- Constructor -----------------------------//
 
 	public Proveedor() {
 		this.NIT = 0;
 		this.nombre ="";
 		this.calificacionCalidad = 0;
+		this.idSucursal = "";
 	}
 	
-	public Proveedor(int nit, String nombre, double calificion)
+	public Proveedor(int nit, String nombre, double calificion, String idSucursal)
 	{
 		this.NIT = nit;
 		this.nombre = nombre;
 		this.calificacionCalidad = calificion;
+		this.idSucursal = idSucursal;
 	}
 	
 	//--------------------------------- Métodos -------------------------------------//
@@ -77,6 +81,18 @@ public class Proveedor implements VOProveedor{
 	public String toString() {
 		return "Proveedor [NIT=" + NIT + ", nombre=" + nombre + ", calificacionCalidad=" + calificacionCalidad + "]";
 
+	}
+
+	@Override
+	public LinkedList<Long> getIdProductos() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public long getIdSupermercado() {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 	
 	

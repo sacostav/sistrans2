@@ -21,6 +21,5 @@ public interface VOCliente {
 	
 	public String getTipoCliente();
 	
-	public long getIdSupermercado();
 
 }

@@ -1,6 +1,6 @@
 package superandes.negocio;
 
-import java.sql.Date;
+import java.util.Date;
 import java.util.LinkedList;
 
 public class Promocion implements VOPromocion {
@@ -31,8 +31,6 @@ public class Promocion implements VOPromocion {
 	
 	public long idPromocion;
 	
-	public LinkedList<Object[]> productosPromocion;
-	
 	public String tipoPromocion;
 	
 	public Date fechaFin;
@@ -43,7 +41,6 @@ public class Promocion implements VOPromocion {
 	public Promocion() {
 		
 		idPromocion = 0;
-	    productosPromocion = new LinkedList<Object[]>();
 		tipoPromocion = "";
 		fechaInicio = new Date(0);
 		fechaFin = new Date(0);
@@ -53,7 +50,6 @@ public class Promocion implements VOPromocion {
 	
 	public Promocion(long id, String tipo, Date pFin, Date pInicio) {
 		idPromocion = id;
-		productosPromocion = new LinkedList<>();
 		tipoPromocion = tipo;
 		fechaInicio = pInicio;
 		fechaFin = pFin;
@@ -69,18 +65,6 @@ public class Promocion implements VOPromocion {
 		this.idPromocion = idPromocionx;
 	}
 	
-
-	@Override
-	public LinkedList<Object[]> getIdProducto() {
-		// TODO Auto-generated method stub
-		return productosPromocion;
-	}
-	
-	public void setIdProducto(LinkedList<Object[]>idProdc) {
-		
-	    productosPromocion = idProdc;
-	}
-
 	@Override
 	public String getTipoPromocion() {
 		// TODO Auto-generated method stub

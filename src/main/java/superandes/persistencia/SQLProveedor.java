@@ -51,10 +51,10 @@ public class SQLProveedor {
 	 * @return El número de tuplas insertadas
 	 */
 
-	public long adicionarProveedor (PersistenceManager pm, int nit, String nombre, double calificacionCalidad, LinkedList<Long> idProductos, long idSupermercado) 
+	public long adicionarProveedor (PersistenceManager pm, int nit, String nombre, double calificacionCalidad, String idSucursal) 
 	{
-		Query q = pm.newQuery(SQL, "INSERT INTO " + pp.darTablaProveedor () + "(NIT, nombre, calificacionCalidad, idProductos, idSupermercado) values (?, ?, ?, ?, ?)");
-		q.setParameters(nit, nombre, calificacionCalidad, idProductos, idSupermercado);
+		Query q = pm.newQuery(SQL, "INSERT INTO " + pp.darTablaProveedor () + "(NIT, nombre, calificacionCalidad, idSucursal) values (?, ?, ?, ?)");
+		q.setParameters(nit, nombre, calificacionCalidad,idSucursal);
 		return (long) q.executeUnique();
 	}
 
@@ -80,7 +80,7 @@ public class SQLProveedor {
 	 * @param pm - El manejador de persistencia
 	 * @return Una lista de objetos Proveedor
 	 */
-	public List<Proveedor> darSucursales (PersistenceManager pm)
+	public List<Proveedor> darProveedor (PersistenceManager pm)
 	{
 		Query q = pm.newQuery(SQL, "SELECT * FROM " + pp.darTablaProveedor ());
 		q.setResultClass(Proveedor.class);

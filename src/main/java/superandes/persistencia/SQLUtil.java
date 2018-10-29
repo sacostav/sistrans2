@@ -27,22 +27,21 @@ public class SQLUtil {
 	
 	public long[] limpiarSuperandes(PersistenceManager pm)
 	{
-		Query qBodega = pm.newQuery(SQL, "DELETE FROM " + ps.darTablaBodega());Query qCliente = pm.newQuery(SQL, "DELETE FORM " + ps.darTablaCliente());
+		Query qBodega = pm.newQuery(SQL, "DELETE FROM " + ps.darTablaBodega());
+		Query qCliente = pm.newQuery(SQL, "DELETE FROM " + ps.darTablaCliente());
 		Query qEstante = pm.newQuery(SQL, "DELETE FROM " + ps.darTablaEstante());
-		Query qPedido = pm.newQuery(SQL, "DLET FROM " + ps.darTablaPedido());
-		Query qProducto = pm.newQuery(SQL, "DLEETE FROM " + ps.darTablaProducto());
+		Query qPedido = pm.newQuery(SQL, "DELETE FROM " + ps.darTablaPedido());
+		Query qProducto = pm.newQuery(SQL, "DELETE FROM " + ps.darTablaProducto());
+		Query qPromocion = pm.newQuery(SQL, "DELETE FROM " + ps.darTablaPromocion());
 		Query qProveedor = pm.newQuery(SQL, "DELETE FROM " + ps.darTablaProveedor());
 		Query qSucursal = pm.newQuery(SQL, "DELETE FROM " + ps.darTablaSucursal());
-		Query qSupermercado = pm.newQuery(SQL, "DELETE FROM " + ps.darTablaSupermercado());
-		Query qPromocion = pm.newQuery(SQL, "DELETE FROM"+ps.darTablaPromocion());
 		Query qVenta = pm.newQuery(SQL, "DELETE FROM"+ps.darTablaVenta());
 		Query qPro = pm.newQuery(SQL, "DELETE FROM"+ps.darTablaProductosPedidos());
-		Query qprop = pm.newQuery(SQL, "DELETE FROM " + ps.darTablaProductoProveedor());
 		Query qVentasp = pm.newQuery(SQL, "DELETE FROM " + ps.darTablaVentasProductos());
 		Query qPromocionP = pm.newQuery(SQL, "DELETE FROM"+ps.darTablaPromocionProducto());
-		Query qVentaC = pm.newQuery(SQL, "DELETE FROM"+ps.darTablaVentasCliente());
-		Query qVentaS = pm.newQuery(SQL, "DELETE FROM"+ps.darTablaVentaSucursal());
-		
+		Query qBodegaP = pm.newQuery(SQL, "DELETE FROM " + ps.darTablaProductosBodega());
+		Query qEstanteP = pm.newQuery(SQL, "DLEETE FROM " + ps.darTablaProductosEstante());
+
 		
 		
 		long bodegaEliminado = (long) qBodega.executeUnique();
@@ -50,19 +49,17 @@ public class SQLUtil {
 		long estanteEliminado = (long) qEstante.executeUnique();
 		long pedidoEliminado = (long) qPedido.executeUnique();
 		long productoEliminado = (long) qProducto.executeUnique();
+		long promocionEliminado = (long)qPromocion.executeUnique();
 		long proveedorEliminado = (long) qProveedor.executeUnique();
 		long sucursalEliminado = (long)qSucursal.executeUnique();
-		long supermercadoEliminado = (long)qSupermercado.executeUnique();
-		long promocionEliminado = (long)qPromocion.executeUnique();
 		long ventaEliminado = (long)qVenta.executeUnique();
 		long p = (long) qPro.executeUnique();
-		long suc = (long)qprop.executeUnique();
-		long su = (long)qVentasp.executeUnique();
-		long pi = (long)qPromocionP.executeUnique();
-		long vent = (long)qVentaC.executeUnique();
-		long vent1 = (long)qVentaS.executeUnique();
+		long ventasP = (long)qVentasp.executeUnique();
+		long promocionP = (long)qPromocionP.executeUnique();
+		long bodegaP = (long)qBodegaP.executeUnique();
+		long estanteP = (long) qEstanteP.executeUnique();
 		
-		return new long[] {p, suc, su, pi,vent,vent1,bodegaEliminado, clienteEliminado, estanteEliminado, pedidoEliminado, productoEliminado, proveedorEliminado, sucursalEliminado, supermercadoEliminado, promocionEliminado, ventaEliminado};
+		return new long[] {p, ventasP, promocionP, bodegaP, estanteP,bodegaEliminado, clienteEliminado, estanteEliminado, pedidoEliminado, productoEliminado, proveedorEliminado, sucursalEliminado, promocionEliminado, ventaEliminado};
 	}
 
 }

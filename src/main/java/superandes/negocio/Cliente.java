@@ -46,10 +46,6 @@ public class Cliente implements VOCliente {
 	
 	private String tipoCliente;
 	
-	/**
-	 * id supermercado
-	 */
-	private long idSupermercado;
 		
 	//---------------------------- Constructor -----------------------------//
 
@@ -61,10 +57,9 @@ public class Cliente implements VOCliente {
 		this.correo = "";
 		this.direccion = "";
 		this.tipoCliente = "";
-		this.idSupermercado = 0;
 	}
 
-	public Cliente(long id, int documentoIdentificacion,int NIT, String nombre, String correo, String direccion,String tipoCliente, long idSup)
+	public Cliente(long id, int documentoIdentificacion,int NIT, String nombre, String correo, String direccion,String tipoCliente)
 	{
 		this.id = id;
 		this.documentoIdentificacion = documentoIdentificacion;
@@ -73,7 +68,6 @@ public class Cliente implements VOCliente {
 		this.correo = correo;
 		this.direccion = direccion;
 		this.tipoCliente = tipoCliente;
-		this.idSupermercado = idSup;
 	}
 	
 	//--------------------------------- Métodos -------------------------------------//
@@ -143,18 +137,7 @@ public class Cliente implements VOCliente {
 	{
 		this.tipoCliente = tipoCliente;
 	}
-	
-	@Override
-	public long getIdSupermercado() {
-		// TODO Auto-generated method stub
-		return idSupermercado;
-	}
 
-	public void setIdSupermercado(long idSupermercado)
-	{
-		this.idSupermercado = idSupermercado;
-	}
-	
 	@Override
 	public long getId() {
 		// TODO Auto-generated method stub
