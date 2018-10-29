@@ -1,0 +1,18 @@
+﻿{
+	"title": "Nombres de las tablas de Superandes Uniandes para la aplicación B",
+	"unidadPersistencia": "Superandes",
+	"tablas":
+	[
+		"Superandes_sequence",
+		"B_BODEGA",
+		"B_CLIENTE",
+		"B_ESTANTE",
+		"B_PEDIDO",
+		"B_PRODUCTO",
+		"B_PROMOCION",
+		"B_PROVEEDOR",
+		"B_SUCURSAL",
+		"B_SUPERMERCADO",
+		"B_VENTA"
+	]
+}
