@@ -41,6 +41,7 @@ public class SQLEstante {
 		q.setParameters(categoria, idSucursal);
 		return (Estante) q.executeUnique();
 	}
+
 	
 	public List<Estante> darEstantes(PersistenceManager pm)
 	{
@@ -50,5 +51,12 @@ public class SQLEstante {
 	}
 	
 
-	
+
+	public List<String> cantidadProductosEnEstante(PersistenceManager pm) {
+
+		Query q = pm.newQuery(SQL, "select  count(nombre), producto.codigobarras from "+ps.darTablaProducto()+ " inner join "+ps.darTablaProductosEstante()+" on producto.idproducto = productosEstante.idproducto group by producto.codigobarras");
+		return (List<String>)q.executeList();
+	}
+
+
 }

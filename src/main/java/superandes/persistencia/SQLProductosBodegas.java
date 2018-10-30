@@ -31,12 +31,4 @@ public class SQLProductosBodegas {
         return (long) q.executeUnique();            
 	}
 	
-	public int cantidadProductoEnBodega(PersistenceManager pm, String codigoBarras) {
-		Query q = pm.newQuery(SQL, "SELECT COUNT (*) FROM "+ps.darTablaProductosBodega()+" INNER JOIN ON "+ps.darTablaProducto()+" ON "+ps.darTablaProductosBodega()+".idProducto="+ps.darTablaProducto()+"idProducto WHERE "+ps.darTablaProducto()+".codigoBarras = ?");
-		q.setParameters(codigoBarras);
-		return (int) q.executeUnique();
-	}
-	
-	
-	
 }

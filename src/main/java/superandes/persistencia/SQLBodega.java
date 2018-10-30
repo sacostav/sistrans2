@@ -92,10 +92,10 @@ public class SQLBodega {
 		return (List<Bodega>) q.executeList();
 	}
 	
-	public int cantidadProductoXBodega(PersistenceManager pm) {
+	public List<String> cantidadProductosEnBodega(PersistenceManager pm) {
 		
-		Query q = pm.newQuery(SQL, "SELECT COUNT (*) FROM"+ pp.darTablaProductosBodega());
-		return q.executeList().size();
+		Query q = pm.newQuery(SQL, "select  count(nombre), producto.codigobarras from "+pp.darTablaProducto()+ " inner join "+pp.darTablaProductosBodega()+" on producto.idproducto = productosbodega.idproducto group by producto.codigobarras");
+		return (List<String>)q.executeList();
 	}
 	
 	/**
