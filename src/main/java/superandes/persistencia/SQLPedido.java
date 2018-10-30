@@ -41,6 +41,14 @@ public class SQLPedido {
 		return (long) q.executeUnique();
 	}
 	
+	public Pedido darPedidoId(PersistenceManager pm , long id)
+	{
+		Query q = pm.newQuery(SQL, "SELECT * FROM " + ps.darTablaPedido() + "WHERE idPedido = ?");
+		q.setResultClass(Pedido.class);
+		q.setParameters(id);
+		return (Pedido) q.executeUnique();
+	}
+	
 	public List<Pedido> darPedidos(PersistenceManager pm)
 	{
 		Query q = pm.newQuery(SQL, "SELECT * FROM " + ps.darTablaEstante());

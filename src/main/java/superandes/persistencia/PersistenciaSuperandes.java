@@ -489,6 +489,10 @@ public class PersistenciaSuperandes {
 		return sqlPedido.eliminarPedidoId(pmf.getPersistenceManager(), id);
 	}
 
+	public Pedido darPedidoId(long id)
+	{
+		return sqlPedido.darPedidoId(pmf.getPersistenceManager(), id);
+	}
 
 	/* ****************************************************************
 	 * 			Metodos para manejar los PRODUCTOS
@@ -561,6 +565,11 @@ public class PersistenciaSuperandes {
 	public long eliminarProductoId(long id)
 	{
 		return sqlProducto.eliminarProductoId(pmf.getPersistenceManager(), id);
+	}
+	
+	public List<Producto> darProductos()
+	{
+		return sqlProducto.darProductos(pmf.getPersistenceManager());
 	}
 
 	//----------------------------------------------------------------

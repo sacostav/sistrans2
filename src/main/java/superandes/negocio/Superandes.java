@@ -104,6 +104,20 @@ public class Superandes {
         log.info ("Generando los VO de Bodega: " + voTipos.size() + " existentes");
         return voTipos;
 	}
+	
+	/**
+	 * Elimina una bebida por su nombre
+	 * Adiciona entradas al log de la aplicación
+	 * @param id - El nombre de la bebida a eliminar
+	 * @return El número de tuplas eliminadas
+	 */
+	public long eliminarBodega (long id)
+	{
+        log.info ("Eliminando bodega por id: " + id);
+        long resp = ps.eliminarBodegaId(id);
+        log.info ("Eliminando bodega por id: " + resp + " tuplas eliminadas");
+        return resp;
+	}
 
 	/* *************************************************
 	 * Metodos para manejar los clientes
@@ -152,6 +166,21 @@ public class Superandes {
         log.info ("Generando los VO de Cliente: " + voTipos.size() + " existentes");
         return voTipos;
 	}
+	
+	/**
+	 * Elimina una bebida por su nombre
+	 * Adiciona entradas al log de la aplicación
+	 * @param id - El nombre de la bebida a eliminar
+	 * @return El número de tuplas eliminadas
+	 */
+	public long eliminarCliente (long id)
+	{
+        log.info ("Eliminando cliente por id: " + id);
+        long resp = ps.eliminarClienteId(id);
+        log.info ("Eliminando cliente por id: " + resp + " tuplas eliminadas");
+        return resp;
+	}
+	
 	/* *************************************************
 	 * Metodos para manejar los estantes
 	 ***************************************************/
@@ -177,6 +206,51 @@ public class Superandes {
 		Estante estante = ps.darEstantePorSucursalyCategoria(idSucursal, categoria);
 		log.info ("Adicionando estante: " + estante);
 		return estante;
+	}
+	
+	/**
+	 * Encuentra el tipos de bebida en Parranderos con el nombre solicitado
+	 * Adiciona entradas al log de la aplicación
+	 * @param nombre - El nombre de la bebida
+	 * @return Un objeto TipoBebida con el tipos de bebida de ese nombre que conoce la aplicación, 
+	 * lleno con su información básica
+	 */
+	public Pedido darPedidoPorId (long id)
+	{
+		log.info ("Buscando pedido por id: " + id);
+		Pedido tb = ps.darPedidoId(id);
+		return tb;
+	}
+	
+	/**
+	 * Elimina una bebida por su nombre
+	 * Adiciona entradas al log de la aplicación
+	 * @param id - El nombre de la bebida a eliminar
+	 * @return El número de tuplas eliminadas
+	 */
+	public long eliminarEstante (long id)
+	{
+        log.info ("Eliminando estante por id: " + id);
+        long resp = ps.eliminarEstanteId(id);
+        log.info ("Eliminando estante por id: " + resp + " tuplas eliminadas");
+        return resp;
+	}
+	
+	/**
+	 * Encuentra todos los tipos de bebida en Parranderos y los devuelve como una lista de VOTipoBebida
+	 * Adiciona entradas al log de la aplicación
+	 * @return Una lista de objetos VOTipoBebida con todos los tipos de bebida que conoce la aplicación, llenos con su información básica
+	 */
+	public List<VOEstante> darVOEstante ()
+	{
+		log.info ("Generando los VO de Cliente");        
+        List<VOEstante> voTipos = new LinkedList<VOEstante>();
+        for (Estante tb : ps.darEstantes())
+        {
+        	voTipos.add (tb);
+        }
+        log.info ("Generando los VO de Cliente: " + voTipos.size() + " existentes");
+        return voTipos;
 	}
 
 	/* *************************************************
@@ -204,6 +278,36 @@ public class Superandes {
 		return resp;
 	}
 
+	/**
+	 * Elimina una bebida por su nombre
+	 * Adiciona entradas al log de la aplicación
+	 * @param id - El nombre de la bebida a eliminar
+	 * @return El número de tuplas eliminadas
+	 */
+	public long eliminarPedido (long id)
+	{
+        log.info ("Eliminando pedido por id: " + id);
+        long resp = ps.eliminarPedidoId(id);
+        log.info ("Eliminando pedido por id: " + resp + " tuplas eliminadas");
+        return resp;
+	}
+	
+	/**
+	 * Encuentra todos los tipos de bebida en Parranderos y los devuelve como una lista de VOTipoBebida
+	 * Adiciona entradas al log de la aplicación
+	 * @return Una lista de objetos VOTipoBebida con todos los tipos de bebida que conoce la aplicación, llenos con su información básica
+	 */
+	public List<VOPedido> darVOPedido ()
+	{
+		log.info ("Generando los VO de Cliente");        
+        List<VOPedido> voTipos = new LinkedList<VOPedido>();
+        for (Pedido tb : ps.darPedidos())
+        {
+        	voTipos.add (tb);
+        }
+        log.info ("Generando los VO de Cliente: " + voTipos.size() + " existentes");
+        return voTipos;
+	}
 
 	/* *************************************************
 	 * Metodos para manejar los productos
@@ -216,6 +320,38 @@ public class Superandes {
 		log.info("Adicionando producto: " + producto);
 		return producto;
 	}
+	
+	/**
+	 * Elimina una bebida por su nombre
+	 * Adiciona entradas al log de la aplicación
+	 * @param id - El nombre de la bebida a eliminar
+	 * @return El número de tuplas eliminadas
+	 */
+	public long eliminarProducto (long id)
+	{
+        log.info ("Eliminando producto por id: " + id);
+        long resp = ps.eliminarProductoId(id);
+        log.info ("Eliminando producto por id: " + resp + " tuplas eliminadas");
+        return resp;
+	}
+	
+	/**
+	 * Encuentra todos los tipos de bebida en Parranderos y los devuelve como una lista de VOTipoBebida
+	 * Adiciona entradas al log de la aplicación
+	 * @return Una lista de objetos VOTipoBebida con todos los tipos de bebida que conoce la aplicación, llenos con su información básica
+	 */
+	public List<VOProducto> darVOProducto ()
+	{
+		log.info ("Generando los VO de Cliente");        
+        List<VOProducto> voTipos = new LinkedList<VOProducto>();
+        for (Producto tb : ps.darProductos())
+        {
+        	voTipos.add (tb);
+        }
+        log.info ("Generando los VO de Cliente: " + voTipos.size() + " existentes");
+        return voTipos;
+	}
+	
 	/* *************************************************
 	 * Metodos para manejar los promocion
 	 ***************************************************/
@@ -232,6 +368,37 @@ public class Superandes {
 	{
 		return ps.darPromociones();
 	}
+	
+	/**
+	 * Elimina una bebida por su nombre
+	 * Adiciona entradas al log de la aplicación
+	 * @param id - El nombre de la bebida a eliminar
+	 * @return El número de tuplas eliminadas
+	 */
+	public long eliminarPromocion (long id)
+	{
+        log.info ("Eliminando promocion por id: " + id);
+        long resp = ps.eliminarPromocionId(id);
+        log.info ("Eliminando promocion por id: " + resp + " tuplas eliminadas");
+        return resp;
+	}
+	
+	/**
+	 * Encuentra todos los tipos de bebida en Parranderos y los devuelve como una lista de VOTipoBebida
+	 * Adiciona entradas al log de la aplicación
+	 * @return Una lista de objetos VOTipoBebida con todos los tipos de bebida que conoce la aplicación, llenos con su información básica
+	 */
+	public List<VOPromocion> darVOPromocion ()
+	{
+		log.info ("Generando los VO de Cliente");        
+        List<VOPromocion> voTipos = new LinkedList<VOPromocion>();
+        for (Promocion tb : ps.darPromociones())
+        {
+        	voTipos.add (tb);
+        }
+        log.info ("Generando los VO de Cliente: " + voTipos.size() + " existentes");
+        return voTipos;
+	}
 
 	/* *************************************************
 	 * Metodos para manejar los proveedores
@@ -243,13 +410,129 @@ public class Superandes {
 		log.info("Adicionando proveedor: " + proveedor);
 		return proveedor;
 	}
+	
+	public Proveedor darProveedorId(int id)
+	{
+		log.info("Buscando proveedor: " + id);
+		Proveedor proveedor = ps.darProveedorNit(id);
+		log.info("Buscando proveedor: " + proveedor);
+		return proveedor;
+	}
+	
+	/**
+	 * Elimina una bebida por su nombre
+	 * Adiciona entradas al log de la aplicación
+	 * @param id - El nombre de la bebida a eliminar
+	 * @return El número de tuplas eliminadas
+	 */
+	public long eliminarProveedor (long id)
+	{
+        log.info ("Eliminando proveedor por id: " + id);
+        long resp = ps.eliminarProveedorId(id);
+        log.info ("Eliminando proveedor por id: " + resp + " tuplas eliminadas");
+        return resp;
+	}
 
 	/* *************************************************
 	 * Metodos para manejar las sucursales
 	 ***************************************************/
 
+	public Sucursal adicionarSucursal( String id, double tamanio, String clave)
+	{
+		log.info("Adicionando sucursal : " + id);
+		Sucursal sucursal = ps.adicionarSucursal(id, tamanio, clave);
+		log.info("Adicionando sucursal : " + sucursal);
+		return sucursal;
+	}
+	
+	public Sucursal darSucursalId(String id)
+	{
+		log.info("Buscando sucursal :" + id);
+		Sucursal sucursal = ps.darSucursalId(id);
+		log.info("buscando sucursal : " + sucursal);
+		return sucursal;
+	}
+	
+	/**
+	 * Elimina una bebida por su nombre
+	 * Adiciona entradas al log de la aplicación
+	 * @param id - El nombre de la bebida a eliminar
+	 * @return El número de tuplas eliminadas
+	 */
+	public long eliminarSucursal (String id)
+	{
+        log.info ("Eliminando sucursal por id: " + id);
+        long resp = ps.eliminarSucursalId(id);
+        log.info ("Eliminando sucursal por id: " + resp + " tuplas eliminadas");
+        return resp;
+	}
+	
+	/**
+	 * Encuentra todos los tipos de bebida en Parranderos y los devuelve como una lista de VOTipoBebida
+	 * Adiciona entradas al log de la aplicación
+	 * @return Una lista de objetos VOTipoBebida con todos los tipos de bebida que conoce la aplicación, llenos con su información básica
+	 */
+	public List<VOSucursal> darVOSucursal ()
+	{
+		log.info ("Generando los VO de Cliente");        
+        List<VOSucursal> voTipos = new LinkedList<VOSucursal>();
+        for (Sucursal tb : ps.darSucursales())
+        {
+        	voTipos.add (tb);
+        }
+        log.info ("Generando los VO de Cliente: " + voTipos.size() + " existentes");
+        return voTipos;
+	}
+	
 	/* *************************************************
 	 * Metodos para manejar los ventas
 	 ***************************************************/
 
+	public Venta adicionarVenta(long id, double total, long idCliente)
+	{
+		log.info("Adicionando venta " + id);
+		Venta venta = ps.adicionarVenta(id, total, idCliente);
+		log.info("Adicionando venta: " + venta);
+		return venta;
+	}
+	
+	public Venta darVentaId(long id)
+	{
+		log.info("Buscando venta" + id);
+		Venta venta = ps.darVentaId(id);
+		log.info("Bsucando venta" + venta);
+		return venta;
+	}
+	
+	/**
+	 * Elimina una bebida por su nombre
+	 * Adiciona entradas al log de la aplicación
+	 * @param id - El nombre de la bebida a eliminar
+	 * @return El número de tuplas eliminadas
+	 */
+	public long eliminarVenta (long id)
+	{
+        log.info ("Eliminando venta por id: " + id);
+        long resp = ps.eliminarVentaId(id);
+        log.info ("Eliminando venta por id: " + resp + " tuplas eliminadas");
+        return resp;
+	}
+	
+	/**
+	 * Encuentra todos los tipos de bebida en Parranderos y los devuelve como una lista de VOTipoBebida
+	 * Adiciona entradas al log de la aplicación
+	 * @return Una lista de objetos VOTipoBebida con todos los tipos de bebida que conoce la aplicación, llenos con su información básica
+	 */
+	public List<VOVenta> darVOVenta ()
+	{
+		log.info ("Generando los VO de Cliente");        
+        List<VOVenta> voTipos = new LinkedList<VOVenta>();
+        for (Venta tb : ps.darVentas())
+        {
+        	voTipos.add (tb);
+        }
+        log.info ("Generando los VO de Cliente: " + voTipos.size() + " existentes");
+        return voTipos;
+	}
+	
 }
