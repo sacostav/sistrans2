@@ -27,7 +27,7 @@ public class SQLPedido {
 	public long registrarPedido(PersistenceManager pm, long idPedido, Date fechaPedido, Date fechaLlegada, String idSucursal, long idProveedores)
 	{
 		
-		Query q = pm.newQuery(SQL, "INSERT INTO " + ps.darTablaPedido() + "(id, fechaPedido ,fechaLlegada, estadoPedido, idSucursal, idProveedor) values (?,?,?,?,?,?)");
+		Query q = pm.newQuery(SQL, "INSERT INTO " + ps.darTablaPedido() + "(id, fechaPedido ,fechaLlegada, estadoPedido, idSucursal, idProveedor, estado) values (?,?,?,?,?,?)");
 		q.setParameters(idPedido, fechaPedido, fechaLlegada,  Pedido.SOLICITADO, idSucursal, idProveedores);
 		return (long) q.executeUnique();
 	}
