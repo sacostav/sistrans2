@@ -236,6 +236,13 @@ public class Superandes {
 	/* *************************************************
 	 * Metodos para manejar los proveedores
 	 ***************************************************/
+	public Proveedor adicionarProveedor(int nit, String nombre, int calificacion)
+	{
+		log.info("Adicionando proveedor : " + nit);
+		Proveedor proveedor = ps.adicionarProveedor(nit, nombre, calificacion);
+		log.info("Adicionando proveedor: " + proveedor);
+		return proveedor;
+	}
 
 	/* *************************************************
 	 * Metodos para manejar las sucursales
