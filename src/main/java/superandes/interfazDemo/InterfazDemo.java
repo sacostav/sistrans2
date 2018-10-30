@@ -26,6 +26,7 @@ import javax.swing.UIManager;
 import org.apache.log4j.Logger;
 
 import superandes.negocio.Superandes;
+import superandes.negocio.VOBodega;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
@@ -229,16 +230,21 @@ public class InterfazDemo extends JFrame implements ActionListener{
     	{
     		// Ejecución de la demo y recolección de los resultados
 			// ATENCIÓN: En una aplicación real, los datos JAMÁS están en el código
-			String nombreProducto = "Coca cola";
-			boolean errorProducto = false;
-			VOProducto producto = superandes.adicionarTipoBebida (nombreTipoBebida);
-			if (tipoBebida == null)
+			double peso = 68;
+			double volumen = 860;
+			long id = 668;
+			String categoria = "Congelados";
+			double nivel = 76;
+			String idSucursal = "esto";
+			boolean errorBodega = false;
+			VOBodega bodega = superandes.adicionarBodega(id, peso, volumen, categoria, idSucursal, nivel);
+			if (bodega == null)
 			{
-				tipoBebida = parranderos.darTipoBebidaPorNombre (nombreTipoBebida);
-				errorTipoBebida = true;
+				bodega = superandes.darBodegaPorId(id);
+				errorBodega = true;
 			}
-			List <VOTipoBebida> lista = parranderos.darVOTiposBebida();
-			long tbEliminados = parranderos.eliminarTipoBebidaPorId (tipoBebida.getId ());
+			List <VOBodega> lista = superandes.darVOBodega();
+			long tbEliminados = parranderos.eliminarTipoBebidaPorId (bodega.getId ());
 			
 			// Generación de la cadena de caracteres con la traza de la ejecución de la demo
 			String resultado = "Demo de creación y listado de TipoBebida\n\n";

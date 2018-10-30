@@ -42,6 +42,16 @@ public class SQLEstante {
 		return (Estante) q.executeUnique();
 	}
 
+	
+	public List<Estante> darEstantes(PersistenceManager pm)
+	{
+		Query q = pm.newQuery(SQL, "SELECT * FROM " + ps.darTablaEstante());
+		q.setResultClass(Estante.class);
+		return q.executeResultList();
+	}
+	
+
+
 	public List<String> cantidadProductosEnEstante(PersistenceManager pm) {
 
 		Query q = pm.newQuery(SQL, "select  count(nombre), producto.codigobarras from "+ps.darTablaProducto()+ " inner join "+ps.darTablaProductosEstante()+" on producto.idproducto = productosEstante.idproducto group by producto.codigobarras");
