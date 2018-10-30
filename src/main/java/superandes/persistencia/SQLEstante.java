@@ -57,6 +57,13 @@ public class SQLEstante {
 		Query q = pm.newQuery(SQL, "select  count(nombre), producto.codigobarras from "+ps.darTablaProducto()+ " inner join "+ps.darTablaProductosEstante()+" on producto.idproducto = productosEstante.idproducto group by producto.codigobarras");
 		return (List<String>)q.executeList();
 	}
+	
+	public long eliminarEstanteId(PersistenceManager pm, long id)
+	{
+		Query q = pm.newQuery(SQL, "DELETE FROM " + ps.darTablaEstante() + "WHERE idEstante = ?");
+		q.setParameters(id);
+		return (long) q.executeUnique();
+	}
 
 
 }

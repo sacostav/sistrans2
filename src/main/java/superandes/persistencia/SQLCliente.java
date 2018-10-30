@@ -49,4 +49,11 @@ public class SQLCliente {
 		q.setResultClass(Cliente.class);
 		return (List<Cliente>) q.executeList();
 	}
+	
+	public long eliminarClienteId(PersistenceManager pm, long id)
+	{
+		Query q = pm.newQuery(SQL, "DELETE FROM " + ps.darTablaCliente() + "WHERE idCliente =?");
+		q.setParameters(id);
+		return (long) q.executeUnique();
+	}
 }

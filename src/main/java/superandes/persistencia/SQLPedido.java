@@ -48,5 +48,11 @@ public class SQLPedido {
 		return q.executeResultList();
 	}
 
+	public long eliminarPedidoId ( PersistenceManager pm, long id)
+	{
+		Query q = pm.newQuery(SQL, "DELETE FROM " + ps.darTablaPedido() + "WHERE idPedido = ?");
+		q.setParameters(id);
+		return (long) q.executeUnique();
+	}
 }
 

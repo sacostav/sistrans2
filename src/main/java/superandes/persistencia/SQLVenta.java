@@ -88,5 +88,12 @@ public class SQLVenta {
 		return (List<Venta>) q.executeList();
 	}
 	
+	public long eliminarVentaId(PersistenceManager pm, long id)
+	{
+		Query q = pm.newQuery(SQL, "DELETE FROM " + pp.darTablaVenta() + "WHERE idVenta =  ?");
+		q.setParameters(id);
+		return (long) q.executeUnique();
+	}
+	
 	
 }

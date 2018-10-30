@@ -80,4 +80,11 @@ public class SQLSucursal {
 		q.setResultClass(Sucursal.class);
 		return (List<Sucursal>) q.executeList();
 	}
+	
+	public long eliminarSucursalId(PersistenceManager pm, String id)
+	{
+		Query q = pm.newQuery(SQL, "DELETE FROM " + pp.darTablaSucursal()+ "WHERE idSucursal = ?");
+		q.setParameters(id);
+		return (long) q.executeUnique();
+	}
 }

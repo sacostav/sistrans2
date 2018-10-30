@@ -116,4 +116,11 @@ public class SQLProveedor {
 		return (long) s.executeUnique();
 
 	}
+	
+	public long eliminarProveedorId(PersistenceManager pm , long id)
+	{
+		Query q = pm.newQuery(SQL, "DELETE FROM " + pp.darTablaProveedor() + "WHERE idProveedor =?");
+		q.setParameters(id);
+		return (long) q.executeUnique();
+	}
 }

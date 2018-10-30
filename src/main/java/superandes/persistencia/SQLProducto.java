@@ -1,6 +1,7 @@
 package superandes.persistencia;
 
 import java.util.Date;
+import java.util.List;
 
 import javax.jdo.PersistenceManager;
 import javax.jdo.Query;
@@ -33,5 +34,19 @@ public class SQLProducto {
 		q.setResultClass(Producto.class);
 		q.setParameters(id);
 		return (Producto) q.executeUnique();
+	}
+	
+	public List<Producto> darProductos(PersistenceManager pm)
+	{
+		Query q = pm.newQuery(SQL, "SELECT * FROM " + ps.darTablaProducto());
+		q.setResultClass(Producto.class);
+		return q.executeResultList();
+	}
+	
+	public long eliminarProductoId(PersistenceManager pm, long id)
+	{
+		Query q = pm.newQuery(SQL, "DELETE FROM " + ps.darTablaProducto() + "WHERE idProducto = ?");
+		q.setParameters(id);
+		return (long) q.executeUnique();
 	}
 }

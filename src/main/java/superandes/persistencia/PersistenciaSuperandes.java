@@ -308,6 +308,11 @@ public class PersistenciaSuperandes {
 	{
 		return sqlBodega.darBodegas(pmf.getPersistenceManager());
 	}
+	
+	public long eliminarBodegaId(long id)
+	{
+		return sqlBodega.eliminarBodega(pmf.getPersistenceManager(), id);
+	}
 
 	/* ****************************************************************
 	 * 			Métodos para manejar los CLIENTES
@@ -356,8 +361,12 @@ public class PersistenciaSuperandes {
 	{
 		return sqlCliente.darClientes(pmf.getPersistenceManager());
 	}
-
-
+	
+	public long eliminarClienteId(long id)
+	{
+		return sqlCliente.eliminarClienteId(pmf.getPersistenceManager(), id);
+	}
+	
 	/* ****************************************************************
 	 * 			Metodos para manejar los ESTANTE
 	 *****************************************************************/
@@ -408,10 +417,20 @@ public class PersistenciaSuperandes {
 	public Estante darEstantePorSucursalyCategoria(String idSucursal, String categoria) {
 		return sqlEstante.darEstantePorCategoriaySucursal(pmf.getPersistenceManager(), categoria, idSucursal);
 	}
+	
+	public List<String> productosEstante()
+	{
+		return sqlEstante.cantidadProductosEnEstante(pmf.getPersistenceManager());
+	}
 
 	public List<Estante> darEstantes()
 	{
 		return sqlEstante.darEstantes(pmf.getPersistenceManager());
+	}
+	
+	public long eliminarEstanteId(long id)
+	{
+		return sqlEstante.eliminarEstanteId(pmf.getPersistenceManager(), id);
 	}
 
 
@@ -463,6 +482,11 @@ public class PersistenciaSuperandes {
 	public List<Pedido> darPedidos()
 	{
 		return sqlPedido.darPedidos(pmf.getPersistenceManager());
+	}
+	
+	public long eliminarPedidoId(long id)
+	{
+		return sqlPedido.eliminarPedidoId(pmf.getPersistenceManager(), id);
 	}
 
 
@@ -532,6 +556,11 @@ public class PersistenciaSuperandes {
 			}
 			pm.close();
 		}
+	}
+	
+	public long eliminarProductoId(long id)
+	{
+		return sqlProducto.eliminarProductoId(pmf.getPersistenceManager(), id);
 	}
 
 	//----------------------------------------------------------------
@@ -618,6 +647,10 @@ public class PersistenciaSuperandes {
 		return sqlPromocion.darPromociones(pmf.getPersistenceManager());
 	}
 
+	public long eliminarPromocionId(long id)
+	{
+		return sqlPromocion.eliminarPromocionId(pmf.getPersistenceManager(), id);
+	}
 
 
 	/* ****************************************************************
@@ -709,6 +742,34 @@ public class PersistenciaSuperandes {
 		}
 	}
 
+	public long eliminarProveedorId(long id)
+	{
+		PersistenceManager pm = pmf.getPersistenceManager();
+		Transaction tx=pm.currentTransaction();
+		try
+		{
+			tx.begin();
+			long eliminado = sqlProveedor.eliminarProveedorId(pmf.getPersistenceManager(), id);
+			tx.commit();
+
+			return eliminado;
+		}
+		catch (Exception e)
+		{
+			//	        	e.printStackTrace();
+			log.error ("Exception : " + e.getMessage() + "\n" + darDetalleException(e));
+			return 0;
+		}
+		finally
+		{
+			if (tx.isActive())
+			{
+				tx.rollback();
+			}
+			pm.close();
+		}
+	}
+	
 
 	/* ****************************************************************
 	 * 			Métodos para manejar los SUCURSAL
@@ -799,6 +860,33 @@ public class PersistenciaSuperandes {
 		}
 	}
 
+	public long eliminarSucursalId( String id)
+	{
+		PersistenceManager pm = pmf.getPersistenceManager();
+		Transaction tx=pm.currentTransaction();
+		try
+		{
+			tx.begin();
+			long resp = sqlSucursal.eliminarSucursalId(pmf.getPersistenceManager(), id);
+			tx.commit();
+
+			return resp;
+		}
+		catch (Exception e)
+		{
+			//	        	e.printStackTrace();
+			log.error ("Exception : " + e.getMessage() + "\n" + darDetalleException(e));
+			return 0;
+		}
+		finally
+		{
+			if (tx.isActive())
+			{
+				tx.rollback();
+			}
+			pm.close();
+		}
+	}
 
 	/* ****************************************************************
 	 * 			Métodos para manejar las VENTAS
@@ -877,6 +965,34 @@ public class PersistenciaSuperandes {
 			//	        	e.printStackTrace();
 			log.error ("Exception : " + e.getMessage() + "\n" + darDetalleException(e));
 			return null;
+		}
+		finally
+		{
+			if (tx.isActive())
+			{
+				tx.rollback();
+			}
+			pm.close();
+		}
+	}
+	
+	public long eliminarVentaId(long id)
+	{
+		PersistenceManager pm = pmf.getPersistenceManager();
+		Transaction tx=pm.currentTransaction();
+		try
+		{
+			tx.begin();
+			long resp = sqlVenta.eliminarVentaId(pmf.getPersistenceManager(), id);
+			tx.commit();
+
+			return resp;
+		}
+		catch (Exception e)
+		{
+			//	        	e.printStackTrace();
+			log.error ("Exception : " + e.getMessage() + "\n" + darDetalleException(e));
+			return 0;
 		}
 		finally
 		{

@@ -45,5 +45,12 @@ public class SQLPromocion {
 			return q.executeResultList();
 		}
 		
+		public long eliminarPromocionId (PersistenceManager pm, long id)
+		{
+			Query q = pm.newQuery(SQL, "DELETE FROM " + ps.darTablaPromocion() + "WHERE idPromocion = ?");
+			q.setParameters(id);
+			return (long) q.executeUnique();
+		}
+		
 		
 }
