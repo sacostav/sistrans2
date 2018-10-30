@@ -26,7 +26,6 @@ public class Proveedor implements VOProveedor{
 	
 	private double calificacionCalidad;
 	
-	private String idSucursal;
 	
 	//---------------------------- Constructor -----------------------------//
 
@@ -34,15 +33,13 @@ public class Proveedor implements VOProveedor{
 		this.NIT = 0;
 		this.nombre ="";
 		this.calificacionCalidad = 0;
-		this.idSucursal = "";
 	}
 	
-	public Proveedor(int nit, String nombre, double calificion, String idSucursal)
+	public Proveedor(int nit, String nombre, double calificion)
 	{
 		this.NIT = nit;
 		this.nombre = nombre;
 		this.calificacionCalidad = calificion;
-		this.idSucursal = idSucursal;
 	}
 	
 	//--------------------------------- Métodos -------------------------------------//

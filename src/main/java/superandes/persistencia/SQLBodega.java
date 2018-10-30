@@ -97,6 +97,19 @@ public class SQLBodega {
 		Query q = pm.newQuery(SQL, "SELECT COUNT (*) FROM"+ pp.darTablaProductosBodega());
 		return q.executeList().size();
 	}
+	
+	/**
+	 * Crea y ejecuta la sentencia SQL para eliminar BEBEDORES de la base de datos de Parranderos, por su nombre
+	 * @param pm - El manejador de persistencia
+	 * @param nombre - El nombre del bebedor
+	 * @return EL número de tuplas eliminadas
+	 */
+	public long eliminarBodega (PersistenceManager pm, long id)
+	{
+        Query q = pm.newQuery(SQL, "DELETE FROM " + pp.darTablaBodega() + " WHERE idBodega = ?");
+        q.setParameters(id);
+        return (long) q.executeUnique();            
+	} 
  	
 }	
 

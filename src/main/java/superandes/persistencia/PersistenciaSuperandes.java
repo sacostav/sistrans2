@@ -68,17 +68,17 @@ public class PersistenciaSuperandes {
 	private SQLSucursal sqlSucursal;
 
 	private SQLPromocion sqlPromocion;
-	
+
 	private SQLVenta sqlVenta; 
-	
+
 	private SQLProductos_pedidos sqlProductos_pedidos;
 
 	private SQLVentas_productos sqlVentas_productos;
 
 	private SQLPromocion_producto sqlPromocion_producto;
-	
+
 	private SQLProductosBodegas sqlProductosBodega;
-	
+
 	private SQLProductosEstantes sqlProductosEstante;
 
 
@@ -113,7 +113,7 @@ public class PersistenciaSuperandes {
 		tablas.add("PROMOCION_PRODUCTO");
 		tablas.add("PRODUCTOS_BODEGA");
 		tablas.add("PRODUCTOS_ESTANTE");
-		
+
 	}
 
 	private PersistenciaSuperandes(JsonObject tableConfig)
@@ -305,6 +305,11 @@ public class PersistenciaSuperandes {
 	public Bodega darBodegaPorId(long idBodega) {
 		return sqlBodega.darBodegaPorId (pmf.getPersistenceManager(), idBodega);
 	}
+	
+	public List<Bodega> darBodegas()
+	{
+		return sqlBodega.darBodegas(pmf.getPersistenceManager());
+	}
 
 	/* ****************************************************************
 	 * 			Métodos para manejar los CLIENTES
@@ -349,6 +354,11 @@ public class PersistenciaSuperandes {
 	public Cliente darClienteId(long id){
 		return sqlCliente.darClienteId(pmf.getPersistenceManager(), id);
 	}
+	
+	public List<Cliente> darClientes()
+	{
+		return sqlCliente.darClientes(pmf.getPersistenceManager());
+	}
 
 
 
@@ -392,8 +402,13 @@ public class PersistenciaSuperandes {
 	public Estante darEstantePorSucursalyCategoria(String idSucursal, String categoria) {
 		return sqlEstante.darEstantePorCategoriaySucursal(pmf.getPersistenceManager(), categoria, idSucursal);
 	}
-
 	
+	public List<Estante> darEstantes()
+	{
+		return sqlEstante.darEstantes(pmf.getPersistenceManager());
+	}
+
+
 	/* ****************************************************************
 	 * 			Métodos para manejar los PEDIDOS
 	 *****************************************************************/
@@ -434,6 +449,11 @@ public class PersistenciaSuperandes {
 
 		return sqlPedido.registrarLlegadaPedido(pmf.getPersistenceManager(), fechaLlegada, idPedido);
 
+	}
+	
+	public List<Pedido> darPedidos()
+	{
+		return sqlPedido.darPedidos(pmf.getPersistenceManager());
 	}
 
 	/* ****************************************************************
@@ -519,22 +539,27 @@ public class PersistenciaSuperandes {
 		return sqlPromocion.darPromocionPorId(pmf.getPersistenceManager(), id);
 	}
 
+	public List<Promocion> darPromociones()
+	{
+		return sqlPromocion.darPromociones(pmf.getPersistenceManager());
+	}
+
 	/* ****************************************************************
 	 * 			Métodos para manejar los PROVEEDOR
 	 *****************************************************************/
-	public Proveedor adicionarProveedor(int nit,String nombre, int calificacion, String idSucursal)
+	public Proveedor adicionarProveedor(int nit,String nombre, int calificacion)
 	{
 		PersistenceManager pm = pmf.getPersistenceManager();
 		Transaction tx=pm.currentTransaction();
 		try
 		{
 			tx.begin();
-			long tuplasInsertadas = sqlProveedor.adicionarProveedor(pm, nit, nombre, calificacion, idSucursal);
+			long tuplasInsertadas = sqlProveedor.adicionarProveedor(pm, nit, nombre, calificacion);
 			tx.commit();
 
 			log.trace ("Inserción del producto: " +nit + ": " + tuplasInsertadas + " tuplas insertadas");
 
-			return new Proveedor(nit, nombre, calificacion, idSucursal);
+			return new Proveedor(nit, nombre, calificacion);
 		}
 		catch (Exception e)
 		{
@@ -989,7 +1014,7 @@ public class PersistenciaSuperandes {
 			pm.close();
 		}
 	}
-	
+
 	public long darVentasProductos()
 	{
 		PersistenceManager pm = pmf.getPersistenceManager();
@@ -1019,9 +1044,9 @@ public class PersistenciaSuperandes {
 		}
 
 	}
-	
-	
-	
+
+
+
 	/**
 	 * Elimina todas las tuplas de todas las tablas de la base de datos de Parranderos
 	 * Crea y ejecuta las sentencias SQL para cada tabla de la base de datos - EL ORDEN ES IMPORTANTE 
@@ -1031,29 +1056,29 @@ public class PersistenciaSuperandes {
 	public long [] limpiarSuperandes ()
 	{
 		PersistenceManager pm = pmf.getPersistenceManager();
-        Transaction tx=pm.currentTransaction();
-        try
-        {
-            tx.begin();
-            long [] resp = sqlUtil.limpiarSuperandes(pm);
-            tx.commit ();
-            log.info ("Borrada la base de datos");
-            return resp;
-        }
-        catch (Exception e)
-        {
-//        	e.printStackTrace();
-        	log.error ("Exception : " + e.getMessage() + "\n" + darDetalleException(e));
-        	return new long[] {-1, -1, -1, -1, -1, -1, -1};
-        }
-        finally
-        {
-            if (tx.isActive())
-            {
-                tx.rollback();
-            }
-            pm.close();
-        }
-		
+		Transaction tx=pm.currentTransaction();
+		try
+		{
+			tx.begin();
+			long [] resp = sqlUtil.limpiarSuperandes(pm);
+			tx.commit ();
+			log.info ("Borrada la base de datos");
+			return resp;
+		}
+		catch (Exception e)
+		{
+			//        	e.printStackTrace();
+			log.error ("Exception : " + e.getMessage() + "\n" + darDetalleException(e));
+			return new long[] {-1, -1, -1, -1, -1, -1, -1};
+		}
+		finally
+		{
+			if (tx.isActive())
+			{
+				tx.rollback();
+			}
+			pm.close();
+		}
+
 	}
 }

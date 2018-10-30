@@ -73,7 +73,37 @@ public class Superandes {
 		log.info ("Adicionando cliente: " + bodega);
 		return bodega;
 	}
+	
+	/**
+	 * Encuentra el tipos de bebida en Parranderos con el nombre solicitado
+	 * Adiciona entradas al log de la aplicación
+	 * @param nombre - El nombre de la bebida
+	 * @return Un objeto TipoBebida con el tipos de bebida de ese nombre que conoce la aplicación, 
+	 * lleno con su información básica
+	 */
+	public Bodega darBodegaPorId (long id)
+	{
+		log.info ("Buscando bodega por id: " + id);
+		Bodega tb = ps.darBodegaPorId(id);
+		return tb;
+	}
 
+	/**
+	 * Encuentra todos los tipos de bebida en Parranderos y los devuelve como una lista de VOTipoBebida
+	 * Adiciona entradas al log de la aplicación
+	 * @return Una lista de objetos VOTipoBebida con todos los tipos de bebida que conoce la aplicación, llenos con su información básica
+	 */
+	public List<VOBodega> darVOBodega ()
+	{
+		log.info ("Generando los VO de Bodega");        
+        List<VOBodega> voTipos = new LinkedList<VOBodega>();
+        for (Bodega tb : ps.darBodegas ())
+        {
+        	voTipos.add (tb);
+        }
+        log.info ("Generando los VO de Bodega: " + voTipos.size() + " existentes");
+        return voTipos;
+	}
 
 	/* *************************************************
 	 * Metodos para manejar los clientes
@@ -106,7 +136,22 @@ public class Superandes {
 		return tb;
 	}
 
-
+	/**
+	 * Encuentra todos los tipos de bebida en Parranderos y los devuelve como una lista de VOTipoBebida
+	 * Adiciona entradas al log de la aplicación
+	 * @return Una lista de objetos VOTipoBebida con todos los tipos de bebida que conoce la aplicación, llenos con su información básica
+	 */
+	public List<VOCliente> darVOCliente ()
+	{
+		log.info ("Generando los VO de Cliente");        
+        List<VOCliente> voTipos = new LinkedList<VOCliente>();
+        for (Cliente tb : ps.darClientes())
+        {
+        	voTipos.add (tb);
+        }
+        log.info ("Generando los VO de Cliente: " + voTipos.size() + " existentes");
+        return voTipos;
+	}
 	/* *************************************************
 	 * Metodos para manejar los estantes
 	 ***************************************************/
@@ -174,6 +219,19 @@ public class Superandes {
 	/* *************************************************
 	 * Metodos para manejar los promocion
 	 ***************************************************/
+	
+	public Promocion adicionarPromocion(long id, String tipo, Date fechaInicio, Date fechaFin)
+	{
+		log.info("Adicionando promocion: " + id);
+		Promocion promocion = ps.adicionarPromocion(tipo, fechaFin, fechaInicio);
+		log.info("Adicionando promocion: " + promocion);
+		return promocion;
+	}
+	
+	public List<Promocion> darPromociones()
+	{
+		return ps.darPromociones();
+	}
 
 	/* *************************************************
 	 * Metodos para manejar los proveedores

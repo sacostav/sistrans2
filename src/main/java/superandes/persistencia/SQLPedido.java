@@ -8,6 +8,7 @@ import javax.jdo.PersistenceManager;
 import javax.jdo.Query;
 
 import oracle.net.aso.t;
+import superandes.negocio.Estante;
 import superandes.negocio.Pedido;
 
 public class SQLPedido {
@@ -38,6 +39,13 @@ public class SQLPedido {
 		Query q = pm.newQuery(SQL, "UPDATE " + ps.darTablaPedido() + "SET fechaLlegada = ?, estadoPedido ="+Pedido.ENTREGADO+ "WHERE idPedido = ?");
 		q.setParameters(pFechaLlegada, idPedido);
 		return (long) q.executeUnique();
+	}
+	
+	public List<Pedido> darPedidos(PersistenceManager pm)
+	{
+		Query q = pm.newQuery(SQL, "SELECT * FROM " + ps.darTablaEstante());
+		q.setResultClass(Pedido.class);
+		return q.executeResultList();
 	}
 
 }

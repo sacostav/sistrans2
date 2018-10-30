@@ -51,10 +51,10 @@ public class SQLProveedor {
 	 * @return El número de tuplas insertadas
 	 */
 
-	public long adicionarProveedor (PersistenceManager pm, int nit, String nombre, double calificacionCalidad, String idSucursal) 
+	public long adicionarProveedor (PersistenceManager pm, int nit, String nombre, double calificacionCalidad ) 
 	{
-		Query q = pm.newQuery(SQL, "INSERT INTO " + pp.darTablaProveedor () + "(NIT, nombre, calificacionCalidad, idSucursal) values (?, ?, ?, ?)");
-		q.setParameters(nit, nombre, calificacionCalidad,idSucursal);
+		Query q = pm.newQuery(SQL, "INSERT INTO " + pp.darTablaProveedor () + "(NIT, nombre, calificacionCalidad, idSucursal) values (?, ?, ?)");
+		q.setParameters(nit, nombre, calificacionCalidad);
 		return (long) q.executeUnique();
 	}
 

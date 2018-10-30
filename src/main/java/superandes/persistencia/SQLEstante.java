@@ -42,6 +42,13 @@ public class SQLEstante {
 		return (Estante) q.executeUnique();
 	}
 	
+	public List<Estante> darEstantes(PersistenceManager pm)
+	{
+		Query q = pm.newQuery(SQL, "SELECT * FROM " + ps.darTablaEstante());
+		q.setResultClass(Estante.class);
+		return q.executeResultList();
+	}
+	
 
 	
 }
