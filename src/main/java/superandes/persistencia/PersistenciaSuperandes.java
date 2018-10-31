@@ -428,6 +428,11 @@ public class PersistenciaSuperandes {
 		return sqlEstante.darEstantes(pmf.getPersistenceManager());
 	}
 	
+	public Estante darEstanteId(long id)
+	{
+		return sqlEstante.darEstanteId(pmf.getPersistenceManager(), id);
+	}
+	
 	public long eliminarEstanteId(long id)
 	{
 		return sqlEstante.eliminarEstanteId(pmf.getPersistenceManager(), id);
@@ -665,7 +670,7 @@ public class PersistenciaSuperandes {
 	/* ****************************************************************
 	 * 			Métodos para manejar los PROVEEDOR
 	 *****************************************************************/
-	public Proveedor adicionarProveedor(int nit,String nombre, int calificacion)
+	public Proveedor adicionarProveedor(int nit,String nombre, double calificacion)
 	{
 		PersistenceManager pm = pmf.getPersistenceManager();
 		Transaction tx=pm.currentTransaction();

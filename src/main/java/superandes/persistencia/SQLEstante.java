@@ -50,6 +50,13 @@ public class SQLEstante {
 		return q.executeResultList();
 	}
 	
+	public Estante darEstanteId(PersistenceManager pm, long id)
+	{
+		Query q = pm.newQuery(SQL, "SELECT * FROM " + ps.darTablaEstante() + "WHERE idEstante = ?");
+		q.setParameters(id);
+		q.setResultClass(Estante.class);
+		return (Estante)q.executeUnique();
+	}
 
 
 	public List<String> cantidadProductosEnEstante(PersistenceManager pm) {

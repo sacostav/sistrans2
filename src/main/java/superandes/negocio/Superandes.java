@@ -215,10 +215,10 @@ public class Superandes {
 	 * @return Un objeto TipoBebida con el tipos de bebida de ese nombre que conoce la aplicación, 
 	 * lleno con su información básica
 	 */
-	public Pedido darPedidoPorId (long id)
+	public Estante darEstantePorId (long id)
 	{
-		log.info ("Buscando pedido por id: " + id);
-		Pedido tb = ps.darPedidoId(id);
+		log.info ("Buscando estante por id: " + id);
+		Estante tb = ps.darEstanteId(id);
 		return tb;
 	}
 	
@@ -276,6 +276,20 @@ public class Superandes {
 		long resp = ps.registrarLlegadaPedido(idPedido, fechaLlegada);
 		log.info("Registrando fecha llegada pedido: " + resp);
 		return resp;
+	}
+	
+	/**
+	 * Encuentra el tipos de bebida en Parranderos con el nombre solicitado
+	 * Adiciona entradas al log de la aplicación
+	 * @param nombre - El nombre de la bebida
+	 * @return Un objeto TipoBebida con el tipos de bebida de ese nombre que conoce la aplicación, 
+	 * lleno con su información básica
+	 */
+	public Pedido darPedidoPorId (long id)
+	{
+		log.info ("Buscando pedido por id: " + id);
+		Pedido tb = ps.darPedidoId(id);
+		return tb;
 	}
 
 	/**
@@ -336,6 +350,20 @@ public class Superandes {
 	}
 	
 	/**
+	 * Encuentra el tipos de bebida en Parranderos con el nombre solicitado
+	 * Adiciona entradas al log de la aplicación
+	 * @param nombre - El nombre de la bebida
+	 * @return Un objeto TipoBebida con el tipos de bebida de ese nombre que conoce la aplicación, 
+	 * lleno con su información básica
+	 */
+	public Producto darProductoPorId (long id)
+	{
+		log.info ("Buscando producto por id: " + id);
+		Producto tb = ps.darProductoId(id);
+		return tb;
+	}
+	
+	/**
 	 * Encuentra todos los tipos de bebida en Parranderos y los devuelve como una lista de VOTipoBebida
 	 * Adiciona entradas al log de la aplicación
 	 * @return Una lista de objetos VOTipoBebida con todos los tipos de bebida que conoce la aplicación, llenos con su información básica
@@ -384,6 +412,20 @@ public class Superandes {
 	}
 	
 	/**
+	 * Encuentra el tipos de bebida en Parranderos con el nombre solicitado
+	 * Adiciona entradas al log de la aplicación
+	 * @param nombre - El nombre de la bebida
+	 * @return Un objeto TipoBebida con el tipos de bebida de ese nombre que conoce la aplicación, 
+	 * lleno con su información básica
+	 */
+	public Promocion darPromocionPorId (long id)
+	{
+		log.info ("Buscando promocion por id: " + id);
+		Promocion tb = ps.darPromocionId(id);
+		return tb;
+	}
+	
+	/**
 	 * Encuentra todos los tipos de bebida en Parranderos y los devuelve como una lista de VOTipoBebida
 	 * Adiciona entradas al log de la aplicación
 	 * @return Una lista de objetos VOTipoBebida con todos los tipos de bebida que conoce la aplicación, llenos con su información básica
@@ -403,7 +445,7 @@ public class Superandes {
 	/* *************************************************
 	 * Metodos para manejar los proveedores
 	 ***************************************************/
-	public Proveedor adicionarProveedor(int nit, String nombre, int calificacion)
+	public Proveedor adicionarProveedor(int nit, String nombre, double calificacion)
 	{
 		log.info("Adicionando proveedor : " + nit);
 		Proveedor proveedor = ps.adicionarProveedor(nit, nombre, calificacion);
@@ -431,6 +473,24 @@ public class Superandes {
         long resp = ps.eliminarProveedorId(id);
         log.info ("Eliminando proveedor por id: " + resp + " tuplas eliminadas");
         return resp;
+	}
+	
+	
+	/**
+	 * Encuentra todos los tipos de bebida en Parranderos y los devuelve como una lista de VOTipoBebida
+	 * Adiciona entradas al log de la aplicación
+	 * @return Una lista de objetos VOTipoBebida con todos los tipos de bebida que conoce la aplicación, llenos con su información básica
+	 */
+	public List<VOProveedor> darVOProveedor ()
+	{
+		log.info ("Generando los VO de Proveedor");        
+        List<VOProveedor> voTipos = new LinkedList<VOProveedor>();
+        for (Proveedor tb : ps.darProveedores())
+        {
+        	voTipos.add (tb);
+        }
+        log.info ("Generando los VO de Proveedor: " + voTipos.size() + " existentes");
+        return voTipos;
 	}
 
 	/* *************************************************
@@ -533,6 +593,23 @@ public class Superandes {
         }
         log.info ("Generando los VO de Cliente: " + voTipos.size() + " existentes");
         return voTipos;
+	}
+	
+	/* ****************************************************************
+	 * 			Métodos para administración
+	 *****************************************************************/
+
+	/**
+	 * Elimina todas las tuplas de todas las tablas de la base de datos de Parranderos
+	 * @return Un arreglo con 7 números que indican el número de tuplas borradas en las tablas GUSTAN, SIRVEN, VISITAN, BEBIDA,
+	 * TIPOBEBIDA, BEBEDOR y BAR, respectivamente
+	 */
+	public long [] limpiarSuperandes ()
+	{
+        log.info ("Limpiando la BD de Superandes");
+        long [] borrrados = ps.limpiarSuperandes();	
+        log.info ("Limpiando la BD de Superandes: Listo!");
+        return borrrados;
 	}
 	
 }
