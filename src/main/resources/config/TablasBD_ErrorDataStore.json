@@ -1,22 +1,15 @@
 {
-	"title": "Nombres de las tablas de Superandes Uniandes para pruebas de la aplicación cuando la base de datos no existe o está caida",
-	"unidadPersistencia": "SuperandesErrorDS",
+	"title": "Nombres de las tablas de Parranderos Uniandes para pruebas de la aplicación cuando la base de datos no existe o está caida",
+	"unidadPersistencia": "ParranderosErrorDS",
 	"tablas":
 	[
-		"Superandes_sequence",
-		"X_BODEGA",
-		"X_CLIENTE",
-		"X_ESTANTE",
-		"X_PEDIDO",
-		"X_PRODUCTO",
-		"X_PROMOCION",
-		"X_PROVEEDOR",
-		"X_SUCURSAL",
-		"X_VENTA",
-		"X_PRODUCTOS_PEDIDOS",
-		"X_VENTAS_PRODUCTOS",
-		"X_PROMOCION_PRODUCTO",
-		"X_PRODUCTOS_BODEGA",
-		"X_PRODUCTOS_ESTANTE"
+		"Parranderos_sequence",
+		"X_TIPOBEBIDA",
+		"X_BEBIDA",
+		"X_BAR",
+		"X_BEBEDOR",
+		"X_GUSTAN",
+		"X_SIRVEN",
+		"X_VISITAN"
 	]
 }

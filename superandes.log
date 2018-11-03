@@ -49,3 +49,9 @@
 16:17:57,340 (main) INFO  [superandes.interfazApp.InterfazApp] - Se encontró un archivo de configuración válido: Interfaz
 16:17:57,341 (main) INFO  [superandes.interfazApp.InterfazApp] - Se aplica configuración indicada en el archivo de configuración
 16:17:57,357 (main) INFO  [superandes.interfazApp.InterfazApp] - Se encontró un archivo de configuración válido: Tablas BD
+17:14:22,685 (main) INFO  [superandes.interfazApp.InterfazApp] - Se encontró un archivo de configuración válido: Interfaz
+17:14:22,685 (main) INFO  [superandes.interfazApp.InterfazApp] - Se aplica configuración indicada en el archivo de configuración
+17:14:22,701 (main) INFO  [superandes.interfazApp.InterfazApp] - Se encontró un archivo de configuración válido: Tablas BD
+17:20:28,485 (main) INFO  [superandes.interfazApp.InterfazApp] - Se encontró un archivo de configuración válido: Interfaz
+17:20:28,485 (main) INFO  [superandes.interfazApp.InterfazApp] - Se aplica configuración indicada en el archivo de configuración
+17:20:28,501 (main) INFO  [superandes.interfazApp.InterfazApp] - Se encontró un archivo de configuración válido: Tablas BD

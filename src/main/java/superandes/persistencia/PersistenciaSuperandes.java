@@ -113,14 +113,15 @@ public class PersistenciaSuperandes {
 		tablas.add("SUCURSAL");
 		tablas.add("PROMOCION");
 		tablas.add("VENTA");
-		tablas.add("PRODUCTOS_PEDIDOS");
-		tablas.add("VENTAS_PRODUCTOS");
-		tablas.add("PROMOCION_PRODUCTO");
-		tablas.add("PRODUCTOS_BODEGA");
-		tablas.add("PRODUCTOS_ESTANTE");
+		tablas.add("PRODUCTOSPEDIDOS");
+		tablas.add("VENTAPRODUCTOS");
+		tablas.add("PRODUCTOSPROMOCION");
+		tablas.add("PRODUCTOSBODEGA");
+		tablas.add("PRODUCTOSESTANTE");
 		tablas.add("CARRO");
 		tablas.add("PRODUCTOS_CARRO");
 		tablas.add("CARRITOCLIENTE");
+		tablas.add("VENTASPROMOCIONES");
 
 	}
 
@@ -129,11 +130,11 @@ public class PersistenciaSuperandes {
 		System.out.println("Aquí llego");
 		crearClasesSQL();
 		tablas = leerNombreTablas(tableConfig);
-//
-//
-//		String unidadPersistencia = tableConfig.get ("unidadPersistencia").getAsString ();
-//		System.out.println("la unidad es: " + unidadPersistencia);
-//		log.trace ("Accediendo unidad de persistencia: " + unidadPersistencia);
+		//
+		//
+		//		String unidadPersistencia = tableConfig.get ("unidadPersistencia").getAsString ();
+		//		System.out.println("la unidad es: " + unidadPersistencia);
+		//		log.trace ("Accediendo unidad de persistencia: " + unidadPersistencia);
 		pmf = JDOHelper.getPersistenceManagerFactory ("Superandes");
 		System.out.println("Aquí también");
 	}
@@ -1257,6 +1258,36 @@ public class PersistenciaSuperandes {
 	 * 			MÃ©todos para manejar Solicitud carro de compras
 	 *****************************************************************/
 
+	public void eliminarProductoEstante( long idProducto)
+	{
+		PersistenceManager pm = pmf.getPersistenceManager();
+		Transaction tx = pm.currentTransaction();
+		
+		try{
+			tx.begin();
+			sqlProductosEstante.eliminarProductosdelEstante(pm, idProducto);
+
+		} catch ( Exception e)
+		{
+			JOptionPane.showInternalMessageDialog(null, "No se pudo eliminar el producto");
+		}
+	}
+	
+	public void eliminarProductoBodega( long idProducto)
+	{
+		PersistenceManager pm = pmf.getPersistenceManager();
+		Transaction tx = pm.currentTransaction();
+		
+		try{
+			tx.begin();
+			sqlProductosBodega.eliminarProductoEnBodegaPorId(pm, idProducto);
+
+		} catch ( Exception e)
+		{
+			JOptionPane.showInternalMessageDialog(null, "No se pudo eliminar el producto");
+		}
+	}
+	
 	//FIXME RF13
 	public void adicionarProductoCarro( long idCliente , long idProducto)
 	{
@@ -1269,6 +1300,13 @@ public class PersistenciaSuperandes {
 			{
 				long idCarro = carro.getIdCarro();
 				sqlProductos_carro.registrarProductosCarro(pm, idProducto, idCarro);
+				Estante estante = sqlProductosEstante.darEstanteProducto(pm, idProducto);
+				if( estante != null)
+				{
+					long idEstante = estante.getIdEstante();
+					sqlProductosEstante.eliminarProductosdelEstante(pm, idProducto);
+				}
+				
 			}else
 				solicitarCarro(idCliente);
 		} catch (Exception e ){
@@ -1300,6 +1338,44 @@ public class PersistenciaSuperandes {
 		return null;
 	}
 
+	// FIXME RF14
+	public Producto devolverProducto(long idCliente, long idProducto)
+	{
+		PersistenceManager pm = pmf.getPersistenceManager();
+		Transaction tx = pm.currentTransaction();
+
+		try{
+			tx.begin();
+			Carro carro = sqlCarritoCliente.darCarroCliente(pm, idCliente);
+			if( carro != null){
+				long idCarro = carro.getIdCarro();
+				sqlProductos_carro.eliminarProductoCarrito(pm, idProducto);
+				Estante estante = sqlProductosEstante.darEstanteProducto(pm, idProducto);
+				if( estante != null){
+					long idEstante = estante.getIdEstante();
+					sqlProductosEstante.adicionarProductosEstante(pm, idEstante, idProducto);
+				}
+
+			}
+
+		}catch (Exception e){
+			JOptionPane.showInternalMessageDialog(null, "El producto no se pudo devolver");
+		}
+		
+		return sqlProducto.darProductoId(pm, idProducto);
+	}
+	
+	// FIXME RF15
+	public List<Object[]> pagarCompra(long idProducto)
+	{
+		PersistenceManager pm = pmf.getPersistenceManager();
+		Transaction tx = pm.currentTransaction();
+		List<Object[]> rta = new LinkedList() ;
+		
+		try{
+			eliminarEstanteId(idProducto);
+ 		}
+	}
 
 	/**
 	 * Elimina todas las tuplas de todas las tablas de la base de datos de Parranderos

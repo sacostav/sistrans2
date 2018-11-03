@@ -3,6 +3,8 @@ package superandes.persistencia;
 import javax.jdo.PersistenceManager;
 import javax.jdo.Query;
 
+import superandes.negocio.Estante;
+
 public class SQLProductosEstantes {
 
 
@@ -57,4 +59,11 @@ public class SQLProductosEstantes {
         q.setParameters(idProd);
         return (Long) q.executeUnique();            
     }
+	
+	public Estante darEstanteProducto(PersistenceManager pm, long idProducto)
+	{
+		Query q = pm.newQuery(SQL, "SELECT * FROM " + pp.darTablaProductosEstante() + "WHERE idProducto = ?");
+		q.setParameters(idProducto);
+		return (Estante) q.executeUnique();
+	}
 }
