@@ -25,7 +25,7 @@ public class SQLProducto {
 	{
 		Query q = pm.newQuery(SQL, "INSERT INTO " + ps.darTablaProducto() + "(idProducto, nombre, marca, precioUnitario, precioUnidadMedida, unidadMed, volumenEmpaque, pesoEmpaque, codigoBarras, fechaVencimiento, nivelReorden, precioProveedor) values (?,?,?,?,?,?,?,?,?,?,?)");
 		q.setParameters(idProducto,nombre, marca, precioUnitario, precioUnidadMedida, unidadMed, volumenEmpaque, pesoEmpaque, codigoBarras, fechaVencimiento, nivelReorden, precioProveedor);
-		return (long) q.executeUnique();
+		return (Long) q.executeUnique();
 	}
 	
 	public Producto darProductoId(PersistenceManager pm, long id)
@@ -47,6 +47,6 @@ public class SQLProducto {
 	{
 		Query q = pm.newQuery(SQL, "DELETE FROM " + ps.darTablaProducto() + "WHERE idProducto = ?");
 		q.setParameters(id);
-		return (long) q.executeUnique();
+		return (Long) q.executeUnique();
 	}
 }

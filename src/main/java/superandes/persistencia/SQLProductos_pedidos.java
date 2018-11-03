@@ -20,13 +20,13 @@ public class SQLProductos_pedidos {
 	{
 		Query q = pm.newQuery(SQL, "INSERT INTO " + ps.darTablaProductosPedidos() + "(idProducto, idPedido) values (?,?)");
 		q.setParameters(idProducto, idPedido);
-		return (long) q.executeUnique();
+		return (Long) q.executeUnique();
 	}
 
 	public long darProductosPedido(PersistenceManager pm, long idPedido)
 	{
 		Query q = pm.newQuery(SQL, "SELECT idProducto FROM" + ps.darTablaProductosPedidos() + "WHERE idPedido = ?");
 		q.setParameters(idPedido);
-		return (long) q.executeUnique();
+		return (Long) q.executeUnique();
 	}
 }

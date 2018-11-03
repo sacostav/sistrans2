@@ -55,7 +55,7 @@ public class SQLProveedor {
 	{
 		Query q = pm.newQuery(SQL, "INSERT INTO " + pp.darTablaProveedor () + "(NIT, nombre, calificacionCalidad, idSucursal) values (?, ?, ?)");
 		q.setParameters(nit, nombre, calificacionCalidad);
-		return (long) q.executeUnique();
+		return (Long) q.executeUnique();
 	}
 
 
@@ -106,14 +106,14 @@ public class SQLProveedor {
 
 		Query q = pm.newQuery(SQL, "SELECT calificacionCalidad FROM "+pp.darTablaProveedor()+"WHERE NIT = ?");
 		q.setParameters(nitP);
-		double num = (double)q.executeUnique();
+		double num = (Double)q.executeUnique();
 
 		num = (num+cal)/2;
 
 		Query s = pm.newQuery(SQL, "UPDATE "+pp.darTablaProveedor()+"SET calificacionCalidad ="+num+" WHERE NIT = ?");
 		q.setParameters(nitP);
 
-		return (long) s.executeUnique();
+		return (Long) s.executeUnique();
 
 	}
 	
@@ -121,6 +121,6 @@ public class SQLProveedor {
 	{
 		Query q = pm.newQuery(SQL, "DELETE FROM " + pp.darTablaProveedor() + "WHERE idProveedor =?");
 		q.setParameters(id);
-		return (long) q.executeUnique();
+		return (Long) q.executeUnique();
 	}
 }

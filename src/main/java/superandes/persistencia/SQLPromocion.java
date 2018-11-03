@@ -26,7 +26,7 @@ public class SQLPromocion {
 		{
 			Query q = pm.newQuery(SQL, "INSERT INTO " + ps.darTablaPromocion() + "(idPromocion, tipoPromocion, fechaFin, fechaInicio) values (?,?,?,?)");
 			q.setParameters(idPromocion, tipoPromocion, fechaFin, fechaInicio);
-			return (long) q.executeUnique();
+			return (Long) q.executeUnique();
 		}
 		
 		
@@ -49,7 +49,7 @@ public class SQLPromocion {
 		{
 			Query q = pm.newQuery(SQL, "DELETE FROM " + ps.darTablaPromocion() + "WHERE idPromocion = ?");
 			q.setParameters(id);
-			return (long) q.executeUnique();
+			return (Long) q.executeUnique();
 		}
 		
 		

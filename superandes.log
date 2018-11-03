@@ -1,0 +1,15 @@
+11:42:05,711 (AWT-EventQueue-0) INFO  [superandes.negocio.Superandes] - Limpiando la BD de superandes
+11:42:05,809 (AWT-EventQueue-0) INFO  [superandes.persistencia.PersistenciaSuperandes] - Borrada la base de datos
+11:42:05,810 (AWT-EventQueue-0) INFO  [superandes.negocio.Superandes] - Limpiando la BD de Superandes: Listo!
+11:13:51,776 (main) INFO  [superandes.interfazApp.InterfazApp] - Se encontro un archivo de configuracion valido: Interfaz
+11:13:51,777 (main) INFO  [superandes.interfazApp.InterfazApp] - Se aplica configuracion indicada en el archivo de configuracion
+11:13:51,791 (main) INFO  [superandes.interfazApp.InterfazApp] - Se encontro un archivo de configuracion valido: Tablas BD
+09:28:36,800 (main) INFO  [superandes.interfazDemo.InterfazDemo] - Se encontro un archivo de configuracion valido: Interfaz
+09:28:36,801 (main) INFO  [superandes.interfazDemo.InterfazDemo] - Se aplica configuracion indicada en el archivo de configuracion
+09:28:36,815 (main) INFO  [superandes.interfazDemo.InterfazDemo] - Se encontro un archivo de configuracion valido: Tablas BD
+10:35:10,795 (main) INFO  [superandes.interfazApp.InterfazApp] - Se encontró un archivo de configuración válido: Interfaz
+10:35:10,797 (main) INFO  [superandes.interfazApp.InterfazApp] - Se aplica configuración indicada en el archivo de configuración
+10:35:10,810 (main) INFO  [superandes.interfazApp.InterfazApp] - NO se encontró un archivo de configuración válido
+10:35:49,344 (main) INFO  [superandes.interfazApp.InterfazApp] - Se encontró un archivo de configuración válido: Interfaz
+10:35:49,345 (main) INFO  [superandes.interfazApp.InterfazApp] - Se aplica configuración indicada en el archivo de configuración
+10:35:49,359 (main) INFO  [superandes.interfazApp.InterfazApp] - Se encontró un archivo de configuración válido: Tablas BD

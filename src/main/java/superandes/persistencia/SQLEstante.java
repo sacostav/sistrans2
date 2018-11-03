@@ -28,7 +28,7 @@ public class SQLEstante {
 		
 		Query q = pm.newQuery(SQL, "INSERT INTO " + ps.darTablaEstante() + "(idEstante, nivelAbastecimiento, volumen, peso, categoria, idSucursal) values (?,?,?,?,?,?)");
 		q.setParameters( idEstante, nivelAbastecimiento, volumen, peso, categoria, idSucursal);
-		return (long) q.executeUnique();
+		return (Long) q.executeUnique();
 	}
 
 
@@ -69,7 +69,7 @@ public class SQLEstante {
 	{
 		Query q = pm.newQuery(SQL, "DELETE FROM " + ps.darTablaEstante() + "WHERE idEstante = ?");
 		q.setParameters(id);
-		return (long) q.executeUnique();
+		return (Long) q.executeUnique();
 	}
 
 

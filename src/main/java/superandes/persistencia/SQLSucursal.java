@@ -55,7 +55,7 @@ public class SQLSucursal {
 	{
         Query q = pm.newQuery(SQL, "INSERT INTO " + pp.darTablaSucursal () + "(idSucursal, tamañoInstalacion, clave) values (?, ?, ?)");
         q.setParameters(idSucursal, tamañoInstalacion, clave);
-        return (long) q.executeUnique();
+        return (Long) q.executeUnique();
 	}
 	
 	
@@ -85,6 +85,6 @@ public class SQLSucursal {
 	{
 		Query q = pm.newQuery(SQL, "DELETE FROM " + pp.darTablaSucursal()+ "WHERE idSucursal = ?");
 		q.setParameters(id);
-		return (long) q.executeUnique();
+		return (Long) q.executeUnique();
 	}
 }

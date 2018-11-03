@@ -15,12 +15,12 @@ private long idProducto, idVenta;
 		idVenta = idPed;
 	}
 	
-	@Override 
+	
 	public long getIdProducto() {
 		return idProducto;
 	}
 	
-	@Override
+	
 	public long getIdVenta(){
 		return idVenta;
 	}

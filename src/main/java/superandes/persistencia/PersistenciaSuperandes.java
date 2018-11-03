@@ -81,8 +81,12 @@ public class PersistenciaSuperandes {
 	private SQLProductosBodegas sqlProductosBodega;
 
 	private SQLProductosEstantes sqlProductosEstante;
+	
+	private SQLCarro sqlCarro;
+	
+	private SQLProductos_Carro sqlProductos_carro;
 
-
+	private SQLCarritoCliente sqlCarritoCliente;
 
 	/* ****************************************************************
 	 * 			Métodos del MANEJADOR DE PERSISTENCIA
@@ -106,7 +110,6 @@ public class PersistenciaSuperandes {
 		tablas.add("PRODUCTO");
 		tablas.add("PROVEEDOR");
 		tablas.add("SUCURSAL");
-		tablas.add("SUPERMERCADO");
 		tablas.add("PROMOCION");
 		tablas.add("VENTA");
 		tablas.add("PRODUCTOS_PEDIDOS");
@@ -114,6 +117,9 @@ public class PersistenciaSuperandes {
 		tablas.add("PROMOCION_PRODUCTO");
 		tablas.add("PRODUCTOS_BODEGA");
 		tablas.add("PRODUCTOS_ESTANTE");
+		tablas.add("CARRO");
+		tablas.add("PRODUCTOS_CARRO");
+		tablas.add("CARRITOCLIENTE");
 
 	}
 
@@ -177,7 +183,14 @@ public class PersistenciaSuperandes {
 		sqlPromocion = new SQLPromocion(this);
 		sqlVenta = new SQLVenta(this);
 		sqlUtil = new SQLUtil(this);
+		sqlProductos_pedidos = new SQLProductos_pedidos(this);
+		sqlVentas_productos = new SQLVentas_productos(this);
+		sqlPromocion_producto = new SQLPromocion_producto(this);
 		sqlProductosBodega = new SQLProductosBodegas(this);
+		sqlProductosEstante = new SQLProductosEstantes(this);
+		sqlCarro = new SQLCarro(this);
+		sqlProductos_carro = new SQLProductos_Carro(this);
+		sqlCarritoCliente = new SQLCarritoCliente(this);
 
 	}
 
@@ -248,6 +261,18 @@ public class PersistenciaSuperandes {
 
 	public String darTablaProductosEstante() {
 		return tablas.get(15);
+	}
+	
+	public String darTablaCarro(){
+		return tablas.get(16);
+	}
+	
+	public String darTablaProductosCarro(){
+		return tablas.get(17);
+	}
+	
+	public String darTablaCarritoCliente(){
+		return tablas.get(18);
 	}
 	private String darDetalleException(Exception e)
 	{
@@ -905,18 +930,18 @@ public class PersistenciaSuperandes {
 	/* ****************************************************************
 	 * 			Métodos para manejar las VENTAS
 	 *****************************************************************/
-	public Venta adicionarVenta(long id, double total, long idCliente )
+	public Venta adicionarVenta(long id, double total, long idCliente, String idSucursal )
 	{
 		PersistenceManager pm = pmf.getPersistenceManager();
 		Transaction tx=pm.currentTransaction();
 		try
 		{
 			tx.begin();
-			long tuplasInsertadas = sqlVenta.adicionarVenta(pm, id, total, idCliente);
+			long tuplasInsertadas = sqlVenta.adicionarVenta(pm, id, total, idCliente, idSucursal);
 			tx.commit();
 			log.trace ("Inserción de la venta: " +id+ ": " + tuplasInsertadas + " tuplas insertadas");
 
-			return new Venta(id, total, idCliente);
+			return new Venta(id, total, idCliente, idSucursal);
 		}
 		catch (Exception e)
 		{
@@ -1160,6 +1185,7 @@ public class PersistenciaSuperandes {
 		}
 
 	}
+	
 
 	/* ****************************************************************
 	 * 			Métodos para manejar Ventas de productos
@@ -1227,6 +1253,7 @@ public class PersistenciaSuperandes {
 	}
 
 
+	
 
 	/**
 	 * Elimina todas las tuplas de todas las tablas de la base de datos de Parranderos

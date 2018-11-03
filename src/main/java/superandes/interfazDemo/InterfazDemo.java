@@ -629,24 +629,7 @@ public class InterfazDemo extends JFrame implements ActionListener{
 
 		panelDatos.actualizarInterfaz(resultado);
 	}
-	
-	/**
-	 * Limpia el contenido del log de datanucleus
-	 * Muestra en el panel de datos la traza de la ejecución
-	 */
-	public void limpiarLogDatanucleus ()
-	{
-		// Ejecución de la operación y recolección de los resultados
-		boolean resp = limpiarArchivo ("datanucleus.log");
-
-		// Generación de la cadena de caracteres con la traza de la ejecución de la demo
-		String resultado = "\n\n************ Limpiando el log de datanucleus ************ \n";
-		resultado += "Archivo " + (resp ? "limpiado exitosamente" : "NO PUDO ser limpiado !!");
-		resultado += "\nLimpieza terminada";
-
-		panelDatos.actualizarInterfaz(resultado);
-	}
-	
+		
 	/**
 	 * Limpia todas las tuplas de todas las tablas de la base de datos de parranderos
 	 * Muestra en el panel de datos el número de tuplas eliminadas de cada tabla
@@ -678,55 +661,6 @@ public class InterfazDemo extends JFrame implements ActionListener{
 			panelDatos.actualizarInterfaz(resultado);
 		}
 	}
-	
-	/**
-	 * Muestra la presentación general del proyecto
-	 */
-	public void mostrarPresentacionGeneral ()
-	{
-		mostrarArchivo ("data/00-ST-ParranderosJDO.pdf");
-	}
-	
-	/**
-	 * Muestra el modelo conceptual de Parranderos
-	 */
-	public void mostrarModeloConceptual ()
-	{
-		mostrarArchivo ("data/Modelo Conceptual Parranderos.pdf");
-	}
-	
-	/**
-	 * Muestra el esquema de la base de datos de Parranderos
-	 */
-	public void mostrarEsquemaBD ()
-	{
-		mostrarArchivo ("data/Esquema BD Parranderos.pdf");
-	}
-	
-	/**
-	 * Muestra el script de creación de la base de datos
-	 */
-	public void mostrarScriptBD ()
-	{
-		mostrarArchivo ("data/EsquemaParranderos.txt");
-	}
-	
-	/**
-	 * Muestra la arquitectura de referencia para Parranderos
-	 */
-	public void mostrarArqRef ()
-	{
-		mostrarArchivo ("data/ArquitecturaReferencia.pdf");
-	}
-	
-	/**
-	 * Muestra la documentación Javadoc del proyectp
-	 */
-	public void mostrarJavadoc ()
-	{
-		mostrarArchivo ("doc/index.html");
-	}
-	
    
 
 	/* ****************************************************************
@@ -1036,8 +970,7 @@ public class InterfazDemo extends JFrame implements ActionListener{
      * Invoca al método correspondiente según el evento recibido
      * @param pEvento - El evento del usuario
      */
-    @Override
-	public void actionPerformed(ActionEvent pEvento)
+    public void actionPerformed(ActionEvent pEvento)
 	{
 		String evento = pEvento.getActionCommand( );		
         try 

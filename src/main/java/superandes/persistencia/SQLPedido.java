@@ -29,7 +29,7 @@ public class SQLPedido {
 		
 		Query q = pm.newQuery(SQL, "INSERT INTO " + ps.darTablaPedido() + "(id, fechaPedido ,fechaLlegada, estadoPedido, idSucursal, idProveedor, estado) values (?,?,?,?,?,?)");
 		q.setParameters(idPedido, fechaPedido, fechaLlegada,  Pedido.SOLICITADO, idSucursal, idProveedores);
-		return (long) q.executeUnique();
+		return (Long) q.executeUnique();
 	}
 
 	
@@ -38,7 +38,7 @@ public class SQLPedido {
 
 		Query q = pm.newQuery(SQL, "UPDATE " + ps.darTablaPedido() + "SET fechaLlegada = ?, estadoPedido ="+Pedido.ENTREGADO+ "WHERE idPedido = ?");
 		q.setParameters(pFechaLlegada, idPedido);
-		return (long) q.executeUnique();
+		return (Long) q.executeUnique();
 	}
 	
 	public Pedido darPedidoId(PersistenceManager pm , long id)
@@ -60,7 +60,7 @@ public class SQLPedido {
 	{
 		Query q = pm.newQuery(SQL, "DELETE FROM " + ps.darTablaPedido() + "WHERE idPedido = ?");
 		q.setParameters(id);
-		return (long) q.executeUnique();
+		return (Long) q.executeUnique();
 	}
 }
 

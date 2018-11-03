@@ -16,14 +16,14 @@ private final static String SQL = PersistenciaSuperandes.SQL;
 	{
 		Query q = pm.newQuery(SQL, "INSERT INTO" + ps.darTablaVentasProductos() + "(idVenta, idProducto) values (?,?)");
 		q.setParameters(idVenta, idProducto);
-		return (long) q.executeUnique();
+		return (Long) q.executeUnique();
 	}
 	
 	public long darProductosVenta(PersistenceManager pm, long idVenta)
 	{
 		Query q = pm.newQuery(SQL, "SELECT idProducto FROM" + ps.darTablaVentasProductos() + "WHERE idVenta = ?");
 		q.setParameters(idVenta);
-		return (long) q.executeUnique();
+		return (Long) q.executeUnique();
 	}
 
 

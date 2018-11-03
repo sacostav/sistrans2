@@ -21,7 +21,7 @@ public class SQLUtil {
 	{
 		Query q = pm.newQuery(SQL, "SELECT " + ps.darSeqSuperandes() + ".nextval FROM DUAL");
 		q.setResultClass(Long.class);
-		long resp = (long) q.executeUnique();
+		long resp = (Long) q.executeUnique();
 		return resp;
 	}
 	
@@ -40,26 +40,30 @@ public class SQLUtil {
 		Query qVentasp = pm.newQuery(SQL, "DELETE FROM " + ps.darTablaVentasProductos());
 		Query qPromocionP = pm.newQuery(SQL, "DELETE FROM"+ps.darTablaPromocionProducto());
 		Query qBodegaP = pm.newQuery(SQL, "DELETE FROM " + ps.darTablaProductosBodega());
-		Query qEstanteP = pm.newQuery(SQL, "DLEETE FROM " + ps.darTablaProductosEstante());
+		Query qEstanteP = pm.newQuery(SQL, "DELETE FROM " + ps.darTablaProductosEstante());
+		Query qCarro = pm.newQuery(SQL, "DELETE FROM " + ps.darTablaCarro());
+		Query qProductoCa = pm.newQuery(SQL, "DELETE FROM " + ps.darTablaProductosCarro());
 
 		
 		
-		long bodegaEliminado = (long) qBodega.executeUnique();
-		long clienteEliminado = (long) qCliente.executeUnique();
-		long estanteEliminado = (long) qEstante.executeUnique();
-		long pedidoEliminado = (long) qPedido.executeUnique();
-		long productoEliminado = (long) qProducto.executeUnique();
-		long promocionEliminado = (long)qPromocion.executeUnique();
-		long proveedorEliminado = (long) qProveedor.executeUnique();
-		long sucursalEliminado = (long)qSucursal.executeUnique();
-		long ventaEliminado = (long)qVenta.executeUnique();
-		long p = (long) qPro.executeUnique();
-		long ventasP = (long)qVentasp.executeUnique();
-		long promocionP = (long)qPromocionP.executeUnique();
-		long bodegaP = (long)qBodegaP.executeUnique();
-		long estanteP = (long) qEstanteP.executeUnique();
+		long bodegaEliminado = (Long) qBodega.executeUnique();
+		long clienteEliminado = (Long) qCliente.executeUnique();
+		long estanteEliminado = (Long) qEstante.executeUnique();
+		long pedidoEliminado = (Long) qPedido.executeUnique();
+		long productoEliminado = (Long) qProducto.executeUnique();
+		long promocionEliminado = (Long)qPromocion.executeUnique();
+		long proveedorEliminado = (Long) qProveedor.executeUnique();
+		long sucursalEliminado = (Long)qSucursal.executeUnique();
+		long ventaEliminado = (Long)qVenta.executeUnique();
+		long p = (Long) qPro.executeUnique();
+		long ventasP = (Long)qVentasp.executeUnique();
+		long promocionP = (Long)qPromocionP.executeUnique();
+		long bodegaP = (Long)qBodegaP.executeUnique();
+		long estanteP = (Long) qEstanteP.executeUnique();
+		long carro = (Long) qCarro.executeUnique();
+		long carroP = (Long) qProductoCa.executeUnique();
 		
-		return new long[] {p, ventasP, promocionP, bodegaP, estanteP,bodegaEliminado, clienteEliminado, estanteEliminado, pedidoEliminado, productoEliminado, proveedorEliminado, sucursalEliminado, promocionEliminado, ventaEliminado};
+		return new long[] {p, carro, carroP, ventasP, promocionP, bodegaP, estanteP,bodegaEliminado, clienteEliminado, estanteEliminado, pedidoEliminado, productoEliminado, proveedorEliminado, sucursalEliminado, promocionEliminado, ventaEliminado};
 	}
 
 }

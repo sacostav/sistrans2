@@ -9,5 +9,7 @@ public interface VOVenta {
 	public long getIdCliente();
 	
 	public double getTotal();
+	
+	public String getIdSucursal();
 
 }

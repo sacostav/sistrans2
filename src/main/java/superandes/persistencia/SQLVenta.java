@@ -53,11 +53,11 @@ public class SQLVenta {
 	 * @return numero de tuplas insertadas 
 	 */
 
-	public long adicionarVenta (PersistenceManager pm, long idVenta, double total,long idCliente) 
+	public long adicionarVenta (PersistenceManager pm, long idVenta, double total,long idCliente, String idSucursal) 
 	{
-		Query q = pm.newQuery(SQL, "INSERT INTO " + pp.darTablaVenta() + "(idVenta,total ,idCliente) values (?, ?, ?)");
-		q.setParameters(idVenta, total, idCliente);
-		return (long) q.executeUnique();
+		Query q = pm.newQuery(SQL, "INSERT INTO " + pp.darTablaVenta() + "(idVenta,total ,idCliente, idSucursal) values (?, ?, ?, ?)");
+		q.setParameters(idVenta, total, idCliente, idSucursal);
+		return (Long) q.executeUnique();
 	}
 	
 	
@@ -70,7 +70,7 @@ public class SQLVenta {
 	
 	public Venta darVentaPorId (PersistenceManager pm, long idVenta) 
 	{
-		Query q = pm.newQuery(SQL, "SELECT * FROM " + pp.darTablaVenta () + " WHERE idBodega = ?");
+		Query q = pm.newQuery(SQL, "SELECT * FROM " + pp.darTablaVenta () + " WHERE idVenta = ?");
 		q.setResultClass(Venta.class);
 		q.setParameters(idVenta);
 		return (Venta) q.executeUnique();
@@ -92,7 +92,7 @@ public class SQLVenta {
 	{
 		Query q = pm.newQuery(SQL, "DELETE FROM " + pp.darTablaVenta() + "WHERE idVenta =  ?");
 		q.setParameters(id);
-		return (long) q.executeUnique();
+		return (Long) q.executeUnique();
 	}
 	
 	

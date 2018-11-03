@@ -1,17 +1,15 @@
 package superandes.persistencia;
 
+import java.util.List;
+
 import javax.jdo.PersistenceManager;
 import javax.jdo.Query;
 
-import java.util.LinkedList;
-import java.util.List;
-
 import superandes.negocio.Bodega;
-import superandes.negocio.Producto;
+import superandes.negocio.Carro;
 
-public class SQLBodega {
-
-
+public class SQLCarro {
+	
 	/* ****************************************************************
 	 * 			Constantes
 	 *****************************************************************/
@@ -37,7 +35,7 @@ public class SQLBodega {
 	 * Constructor
 	 * @param pp - El Manejador de persistencia de la aplicación
 	 */
-	public SQLBodega (PersistenciaSuperandes pp)
+	public SQLCarro (PersistenciaSuperandes pp)
 	{
 		this.pp = pp;
 	}
@@ -53,12 +51,12 @@ public class SQLBodega {
 	 * @return El número de tuplas insertadas
 	 */
 
-	public long adicionarBodega (PersistenceManager pm, long idBodega, double pesoBodega, double volumenBodega, String categoria, String idSucursal, double nivelAbastecimiento) 
+	public long adicionarCarro (PersistenceManager pm, long idCarro, long idSucursal) 
 	
 	{
 		
-		Query q = pm.newQuery(SQL, "INSERT INTO " + pp.darTablaBodega () + "(idBodega, pesoBodega, volumenBodega, categoria, idSucursal, nivelAbastecimiento) values (?, ?, ?, ?, ?,?)");
-		q.setParameters(idBodega, pesoBodega, volumenBodega, categoria,idSucursal, nivelAbastecimiento);
+		Query q = pm.newQuery(SQL, "INSERT INTO " + pp.darTablaCarro() + "(idCarro, idSucursal) values (?, ?)");
+		q.setParameters(idCarro, idSucursal);
 		return (Long) q.executeUnique();
 	}
 
@@ -71,12 +69,12 @@ public class SQLBodega {
 	 * @param idBodega - El identificador de la bodega
 	 * @return El objeto Bodega que tiene el identificador dado
 	 */
-	public Bodega darBodegaPorId (PersistenceManager pm, long idBodega) 
+	public Carro darCarroPorId (PersistenceManager pm, long idCarro) 
 	{
-		Query q = pm.newQuery(SQL, "SELECT * FROM " + pp.darTablaBodega () + " WHERE idBodega = ?");
-		q.setResultClass(Bodega.class);
-		q.setParameters(idBodega);
-		return (Bodega) q.executeUnique();
+		Query q = pm.newQuery(SQL, "SELECT * FROM " + pp.darTablaCarro () + " WHERE idCarro = ?");
+		q.setResultClass(Carro.class);
+		q.setParameters(idCarro);
+		return (Carro) q.executeUnique();
 	}
 
 	/**
@@ -85,16 +83,16 @@ public class SQLBodega {
 	 * @param pm - El manejador de persistencia
 	 * @return Una lista de objetos Bar
 	 */
-	public List<Bodega> darBodegas (PersistenceManager pm)
+	public List<Carro> darCarros (PersistenceManager pm)
 	{
-		Query q = pm.newQuery(SQL, "SELECT * FROM " + pp.darTablaBodega ());
-		q.setResultClass(Bodega.class);
-		return (List<Bodega>) q.executeList();
+		Query q = pm.newQuery(SQL, "SELECT * FROM " + pp.darTablaCarro ());
+		q.setResultClass(Carro.class);
+		return (List<Carro>) q.executeList();
 	}
 	
-	public List<String> cantidadProductosEnBodega(PersistenceManager pm) {
+	public List<String> cantidadProductosEnCarro(PersistenceManager pm) {
 		
-		Query q = pm.newQuery(SQL, "select  count(nombre), producto.codigobarras from "+pp.darTablaProducto()+ " inner join "+pp.darTablaProductosBodega()+" on producto.idproducto = productosbodega.idproducto group by producto.codigobarras");
+		Query q = pm.newQuery(SQL, "select  count(nombre), producto.codigobarras from "+pp.darTablaProducto()+ " inner join "+pp.darTablaProductosCarro()+" on producto.idproducto = productos_carro.idproducto group by producto.codigobarras");
 		return (List<String>)q.executeList();
 	}
 	
@@ -104,13 +102,11 @@ public class SQLBodega {
 	 * @param nombre - El nombre del bebedor
 	 * @return EL número de tuplas eliminadas
 	 */
-	public long eliminarBodega (PersistenceManager pm, long id)
+	public long eliminarCarro (PersistenceManager pm, long id)
 	{
-        Query q = pm.newQuery(SQL, "DELETE FROM " + pp.darTablaBodega() + " WHERE idBodega = ?");
+        Query q = pm.newQuery(SQL, "DELETE FROM " + pp.darTablaCarro() + " WHERE idCarro = ?");
         q.setParameters(id);
-        return (Long) q.executeUnique();           
+        return (Long) q.executeUnique();            
 	} 
- 	
-}	
 
-
+}

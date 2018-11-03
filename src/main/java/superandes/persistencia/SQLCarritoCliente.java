@@ -3,9 +3,8 @@ package superandes.persistencia;
 import javax.jdo.PersistenceManager;
 import javax.jdo.Query;
 
-public class SQLProductosEstantes {
-
-
+public class SQLCarritoCliente {
+	
 	/* ****************************************************************
 	 * 			Constantes
 	 *****************************************************************/
@@ -31,30 +30,17 @@ public class SQLProductosEstantes {
 	 * Constructor
 	 * @param pp - El Manejador de persistencia de la aplicación
 	 */
-	public SQLProductosEstantes (PersistenciaSuperandes pp)
+	public SQLCarritoCliente (PersistenciaSuperandes pp)
 	{
 		this.pp = pp;
 	}
-
-	/**
-	 * Crea y ejecuta la sentencia SQL para adicionar una BODEGA a la base de datos de SUPERANDES
-	 * @param pm - El manejador de persistencia
-	 * @param idEstante - El identificador de la bodega
-	 * @param idProducto - categoria producto 
-	 */
-
-	public long adicionarProductosEstante (PersistenceManager pm, long idEstante, long idProducto) 
 	
+	public long registrarCarritoCliente(PersistenceManager pm, long idCliente, long idCarro)
 	{
-	    Query q = pm.newQuery(SQL, "INSERT INTO " + pp.darTablaProductosEstante() + "(idProducto, idEstante) values (?, ?)");
-		q.setParameters(idProducto, idEstante);
+		Query q = pm.newQuery(SQL, "INSERT INTO " + pp.darTablaCarritoCliente() + "(idCliente, idCarro) values (?,?)");
+		q.setParameters(idCliente, idCarro);
 		return (Long) q.executeUnique();
 	}
-	
-	public long eliminarProductosdelEstante (PersistenceManager pm, long idProd)
-	{
-        Query q = pm.newQuery(SQL, "DELETE FROM " + pp.darTablaProductosEstante() + " WHERE idproducto = ?");
-        q.setParameters(idProd);
-        return (Long) q.executeUnique();            
-    }
+
+
 }

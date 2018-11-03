@@ -1,11 +1,14 @@
 package superandes.persistencia;
 
+import java.util.List;
+
 import javax.jdo.PersistenceManager;
 import javax.jdo.Query;
 
-public class SQLProductosEstantes {
+import superandes.negocio.Carro;
 
-
+public class SQLProductos_Carro {
+	
 	/* ****************************************************************
 	 * 			Constantes
 	 *****************************************************************/
@@ -31,30 +34,29 @@ public class SQLProductosEstantes {
 	 * Constructor
 	 * @param pp - El Manejador de persistencia de la aplicación
 	 */
-	public SQLProductosEstantes (PersistenciaSuperandes pp)
+	public SQLProductos_Carro (PersistenciaSuperandes pp)
 	{
 		this.pp = pp;
 	}
-
-	/**
-	 * Crea y ejecuta la sentencia SQL para adicionar una BODEGA a la base de datos de SUPERANDES
-	 * @param pm - El manejador de persistencia
-	 * @param idEstante - El identificador de la bodega
-	 * @param idProducto - categoria producto 
-	 */
-
-	public long adicionarProductosEstante (PersistenceManager pm, long idEstante, long idProducto) 
 	
+	public long registrarProductosCarro(PersistenceManager pm, long idProducto, long idCarro)
 	{
-	    Query q = pm.newQuery(SQL, "INSERT INTO " + pp.darTablaProductosEstante() + "(idProducto, idEstante) values (?, ?)");
-		q.setParameters(idProducto, idEstante);
+		Query q = pm.newQuery(SQL, "INSERT INTO " + pp.darTablaProductosCarro() + "(idProducto, idCarro) values (?,?)");
+		q.setParameters(idProducto, idCarro);
+		return (Long) q.executeUnique();
+	}
+
+	public long darProductosCarro(PersistenceManager pm, long idCarro)
+	{
+		Query q = pm.newQuery(SQL, "SELECT idProducto FROM" + pp.darTablaProductosCarro() + "WHERE idCarro = ?");
+		q.setParameters(idCarro);
 		return (Long) q.executeUnique();
 	}
 	
-	public long eliminarProductosdelEstante (PersistenceManager pm, long idProd)
+	public void vaciarCarrito( PersistenceManager pm, long idCarro)
 	{
-        Query q = pm.newQuery(SQL, "DELETE FROM " + pp.darTablaProductosEstante() + " WHERE idproducto = ?");
-        q.setParameters(idProd);
-        return (Long) q.executeUnique();            
-    }
+		Query q = pm.newQuery(SQL, "DELETE FROM " + pp.darTablaProductosCarro() + "WHERE idCarro =?");
+		q.setParameters(idCarro);
+	}
+
 }

@@ -5,24 +5,108 @@
 	"bannerPath": "",
 	"menuBar":
 	[
-		{ "menuTitle": "TipoBebida",
+		{ "menuTitle": "Bodega",
 		  "options":
 			[
 				{
 					"label": "Adicionar",
-					"event": "adicionarTipoBebida"
+					"event": "adicionarBodega"
 				},
 				{
 					"label": "Listar",
-					"event": "listarTipoBebida"
+					"event": "listarBodega"
 				},
 				{
 					"label": "Borrar por Id",
-					"event": "eliminarTipoBebidaPorId"
+					"event": "eliminarBodegaPorId"
 				},
 				{
-					"label": "Buscar por Nombre",
-					"event": "buscarTipoBebidaPorNombre"
+					"label": "Buscar por Id",
+					"event": "buscarBodegaPorId"
+				}
+			]
+		},
+		{ "menuTitle": "Cliente",
+		  "options":
+			[
+				{
+					"label": "Adicionar",
+					"event": "adicionarCliente"
+				},
+				{
+					"label": "Listar",
+					"event": "listarCliente"
+				},
+				{
+					"label": "Borrar por Id",
+					"event": "eliminarClientePorId"
+				},
+				{
+					"label": "Buscar por Id",
+					"event": "buscarClientePorId"
+				}
+			]
+		},
+		{ "menuTitle": "Estante",
+		  "options":
+			[
+				{
+					"label": "Adicionar",
+					"event": "adicionarEstante"
+				},
+				{
+					"label": "Listar",
+					"event": "listarEstante"
+				},
+				{
+					"label": "Borrar por Id",
+					"event": "eliminarEstantePorId"
+				},
+				{
+					"label": "Buscar por Id",
+					"event": "buscarEstantePorId"
+				}
+			]
+		},
+				{ "menuTitle": "Pedido",
+		  "options":
+			[
+				{
+					"label": "Adicionar",
+					"event": "adicionarPedido"
+				},
+				{
+					"label": "Listar",
+					"event": "listarPedido"
+				},
+				{
+					"label": "Borrar por Id",
+					"event": "eliminarPedidoPorId"
+				},
+				{
+					"label": "Buscar por Id",
+					"event": "buscarPedidoPorId"
+				}
+			]
+		},
+				{ "menuTitle": "Producto",
+		  "options":
+			[
+				{
+					"label": "Adicionar",
+					"event": "adicionarProducto"
+				},
+				{
+					"label": "Listar",
+					"event": "listarProducto"
+				},
+				{
+					"label": "Borrar por Id",
+					"event": "eliminarProductoPorId"
+				},
+				{
+					"label": "Buscar por Id",
+					"event": "buscarProductoPorId"
 				}
 			]
 		},
@@ -30,16 +114,12 @@
 		  "options":
 			[
 				{
-					"label": "Mostrar log Parranderos",
-					"event": "mostrarLogParranderos"
+					"label": "Mostrar log Superandes",
+					"event": "mostrarLogSuperandes"
 				},
 				{
-					"label": "Mostrar log datanucleus",
-					"event": "mostrarLogDatanuecleus"
-				},
-				{
-					"label": "Limpiar log de parranderos",
-					"event": "limpiarLogParranderos"
+					"label": "Limpiar log de superandes",
+					"event": "limpiarLogSuperandes"
 				},
 				{
 					"label": "Limpiar log de datanucleus",
