@@ -49,7 +49,7 @@ public class Bodega implements VOBodega{
 
 	}
 	//--------------------------------- Métodos -------------------------------------//
-	@Override
+	
 	public String getCategoria() {
 		// TODO Auto-generated method stub
 		return categoria;
@@ -60,7 +60,7 @@ public class Bodega implements VOBodega{
 		this.categoria = id;
 	}
 
-	@Override
+	
 	public double getVolumenBodega() {
 		// TODO Auto-generated method stub
 		return volumenBodega;
@@ -71,7 +71,7 @@ public class Bodega implements VOBodega{
 		this.volumenBodega = vol;
 	}
 	
-	@Override 
+	 
 	public double getPesoBodega() {
 	return pesoBodega;	
 	}
@@ -82,7 +82,7 @@ public class Bodega implements VOBodega{
 	}
 
 
-	@Override
+	
 	public String getIdSucursal() {
 		// TODO Auto-generated method stub
 		return idSucursal;
@@ -93,7 +93,7 @@ public class Bodega implements VOBodega{
 		this.idSucursal = id;
 	}
 
-	@Override
+	
 	
 	public double getNivelAbastecimiento() {
 		return nivelAbastecimiento;
@@ -103,7 +103,7 @@ public class Bodega implements VOBodega{
 		nivelAbastecimiento = niv;
 	}
 	
-	@Override 
+	 
 	public long getIdBodega() {
 		return idBodega;
 	}
@@ -111,7 +111,7 @@ public class Bodega implements VOBodega{
 	public void setIdBodega(long idb) {
 		idBodega = idb;
 	}
-	@Override
+	
 
 	public String toString() {
 		return "Bodega [categoria=" + categoria + ", pesoBodega=" + pesoBodega+ ", volumenBodega="+volumenBodega + ", idSucural=" + idSucursal + "]";

@@ -47,7 +47,7 @@ public class Pedido implements VOPedido{
 
 	//--------------------------------- Métodos -------------------------------------//
 
-	@Override
+	
 	public long getIdPedido() {
 		return idPedido;
 	}
@@ -57,7 +57,7 @@ public class Pedido implements VOPedido{
 		this.idPedido = id;
 	}
 
-	@Override
+	
 	public String getIdSucursal() {
 		return idSucursal;
 	}
@@ -69,7 +69,7 @@ public class Pedido implements VOPedido{
 
 
 
-	@Override
+	
 	public long getIdProveedor() {
 		return idProveedor;
 	}
@@ -79,7 +79,7 @@ public class Pedido implements VOPedido{
 		this.idProveedor = id;
 	}
 
-	@Override
+	
 	public Date getFechaPedido() {
 		return fechaPedido;
 	}
@@ -89,7 +89,7 @@ public class Pedido implements VOPedido{
 		this.fechaPedido = fecha;
 	}
 
-	@Override
+	
 	public Date getFechaLlegada() {
 		return fechaLLegada;
 	}
@@ -100,7 +100,7 @@ public class Pedido implements VOPedido{
 	}
 
 
-	@Override
+	
 	public String getEstadoPedido() {
 		return estadoPedido;
 	}
@@ -111,7 +111,7 @@ public class Pedido implements VOPedido{
 	}
 
 
-	@Override
+	
 	public String toString()
 	{
 		return "Pedido [idPedido = " + idPedido + "fechaPedido " + fechaPedido + "fechaLlegada" + fechaLLegada + "idSucursal " + idSucursal + "idProductos idProveedor " + idProveedor + "]";

@@ -62,7 +62,7 @@ public class InterfazApp extends JFrame implements ActionListener{
 	/**
 	 * Ruta al archivo de configuración de los nombres de tablas de la base de datos
 	 */
-	private static final String CONFIG_TABLAS = "./src/main/resources/config/TablasBD.json"; 
+	private static final String CONFIG_TABLAS = "./src/main/resources/config/TablasBD_A.json"; 
 
 	/* ****************************************************************
 	 * 			Atributos
@@ -104,6 +104,10 @@ public class InterfazApp extends JFrame implements ActionListener{
 	 */
 	public InterfazApp( )
 	{
+		String idt = JOptionPane.showInputDialog (this, "a que sucursal pertenece", "añadir", JOptionPane.QUESTION_MESSAGE);
+		long idSuc = Long.valueOf(idt);
+		//this.currentSucursal = idSuc;
+
 		// Carga la configuración de la interfaz desde un archivo JSON
 		guiConfig = openConfig ("Interfaz", CONFIG_INTERFAZ);
 
@@ -120,9 +124,11 @@ public class InterfazApp extends JFrame implements ActionListener{
 		String path = guiConfig.get("bannerPath").getAsString();
 		panelDatos = new PanelDatos ( );
 
+
 		setLayout (new BorderLayout());
+		//add(new PanelIzquierdo(metodos), BorderLayout.WEST);
 		add (new JLabel (new ImageIcon (path)), BorderLayout.NORTH );          
-		add( panelDatos, BorderLayout.CENTER );        
+		add( panelDatos, BorderLayout.CENTER );       
 	}
 
 	/* ****************************************************************

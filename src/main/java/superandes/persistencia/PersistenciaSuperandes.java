@@ -11,6 +11,7 @@ import superandes.negocio.Venta;
 import superandes.negocio.Ventas_productos;
 import superandes.negocio.productosEstantes;
 import superandes.negocio.Bodega;
+import superandes.negocio.Carro;
 import superandes.negocio.Cliente;
 import superandes.negocio.Estante;
 import superandes.negocio.Pedido;
@@ -29,7 +30,7 @@ import javax.jdo.JDOHelper;
 import javax.jdo.PersistenceManager;
 import javax.jdo.PersistenceManagerFactory;
 import javax.jdo.Transaction;
-import javax.jdo.annotations.Cacheable;
+import javax.swing.JOptionPane;
 
 public class PersistenciaSuperandes {
 
@@ -81,9 +82,9 @@ public class PersistenciaSuperandes {
 	private SQLProductosBodegas sqlProductosBodega;
 
 	private SQLProductosEstantes sqlProductosEstante;
-	
+
 	private SQLCarro sqlCarro;
-	
+
 	private SQLProductos_Carro sqlProductos_carro;
 
 	private SQLCarritoCliente sqlCarritoCliente;
@@ -125,20 +126,20 @@ public class PersistenciaSuperandes {
 
 	private PersistenciaSuperandes(JsonObject tableConfig)
 	{
+		System.out.println("Aquí llego");
 		crearClasesSQL();
 		tablas = leerNombreTablas(tableConfig);
-
-
-		String unidadPersistencia = tableConfig.get ("unidadPersistencia").getAsString ();
-		log.trace ("Accediendo unidad de persistencia: " + unidadPersistencia);
-		pmf = JDOHelper.getPersistenceManagerFactory (unidadPersistencia);
-
+//
+//
+//		String unidadPersistencia = tableConfig.get ("unidadPersistencia").getAsString ();
+//		System.out.println("la unidad es: " + unidadPersistencia);
+//		log.trace ("Accediendo unidad de persistencia: " + unidadPersistencia);
+		pmf = JDOHelper.getPersistenceManagerFactory ("Superandes");
+		System.out.println("Aquí también");
 	}
+	public static PersistenciaSuperandes getInstance() {
 
-
-	public static  PersistenciaSuperandes getInstance() {
-
-		if( instance == null)
+		if(instance == null)
 		{
 			instance = new PersistenciaSuperandes();
 		}
@@ -262,15 +263,15 @@ public class PersistenciaSuperandes {
 	public String darTablaProductosEstante() {
 		return tablas.get(15);
 	}
-	
+
 	public String darTablaCarro(){
 		return tablas.get(16);
 	}
-	
+
 	public String darTablaProductosCarro(){
 		return tablas.get(17);
 	}
-	
+
 	public String darTablaCarritoCliente(){
 		return tablas.get(18);
 	}
@@ -333,7 +334,7 @@ public class PersistenciaSuperandes {
 	{
 		return sqlBodega.darBodegas(pmf.getPersistenceManager());
 	}
-	
+
 	public long eliminarBodegaId(long id)
 	{
 		return sqlBodega.eliminarBodega(pmf.getPersistenceManager(), id);
@@ -386,12 +387,12 @@ public class PersistenciaSuperandes {
 	{
 		return sqlCliente.darClientes(pmf.getPersistenceManager());
 	}
-	
+
 	public long eliminarClienteId(long id)
 	{
 		return sqlCliente.eliminarClienteId(pmf.getPersistenceManager(), id);
 	}
-	
+
 	/* ****************************************************************
 	 * 			Metodos para manejar los ESTANTE
 	 *****************************************************************/
@@ -442,7 +443,7 @@ public class PersistenciaSuperandes {
 	public Estante darEstantePorSucursalyCategoria(String idSucursal, String categoria) {
 		return sqlEstante.darEstantePorCategoriaySucursal(pmf.getPersistenceManager(), categoria, idSucursal);
 	}
-	
+
 	public List<String> productosEstante()
 	{
 		return sqlEstante.cantidadProductosEnEstante(pmf.getPersistenceManager());
@@ -452,12 +453,12 @@ public class PersistenciaSuperandes {
 	{
 		return sqlEstante.darEstantes(pmf.getPersistenceManager());
 	}
-	
+
 	public Estante darEstanteId(long id)
 	{
 		return sqlEstante.darEstanteId(pmf.getPersistenceManager(), id);
 	}
-	
+
 	public long eliminarEstanteId(long id)
 	{
 		return sqlEstante.eliminarEstanteId(pmf.getPersistenceManager(), id);
@@ -513,7 +514,7 @@ public class PersistenciaSuperandes {
 	{
 		return sqlPedido.darPedidos(pmf.getPersistenceManager());
 	}
-	
+
 	public long eliminarPedidoId(long id)
 	{
 		return sqlPedido.eliminarPedidoId(pmf.getPersistenceManager(), id);
@@ -591,12 +592,12 @@ public class PersistenciaSuperandes {
 			pm.close();
 		}
 	}
-	
+
 	public long eliminarProductoId(long id)
 	{
 		return sqlProducto.eliminarProductoId(pmf.getPersistenceManager(), id);
 	}
-	
+
 	public List<Producto> darProductos()
 	{
 		return sqlProducto.darProductos(pmf.getPersistenceManager());
@@ -680,7 +681,7 @@ public class PersistenciaSuperandes {
 	public Promocion darPromocionId(long id) {
 		return sqlPromocion.darPromocionPorId(pmf.getPersistenceManager(), id);
 	}
-	
+
 	public List<Promocion> darPromociones()
 	{
 		return sqlPromocion.darPromociones(pmf.getPersistenceManager());
@@ -808,7 +809,7 @@ public class PersistenciaSuperandes {
 			pm.close();
 		}
 	}
-	
+
 
 	/* ****************************************************************
 	 * 			MÃ©todos para manejar los SUCURSAL
@@ -1014,7 +1015,7 @@ public class PersistenciaSuperandes {
 			pm.close();
 		}
 	}
-	
+
 	public long eliminarVentaId(long id)
 	{
 		PersistenceManager pm = pmf.getPersistenceManager();
@@ -1185,7 +1186,7 @@ public class PersistenciaSuperandes {
 		}
 
 	}
-	
+
 
 	/* ****************************************************************
 	 * 			MÃ©todos para manejar Ventas de productos
@@ -1252,8 +1253,53 @@ public class PersistenciaSuperandes {
 
 	}
 
+	/* ****************************************************************
+	 * 			MÃ©todos para manejar Solicitud carro de compras
+	 *****************************************************************/
 
-	
+	//FIXME RF13
+	public void adicionarProductoCarro( long idCliente , long idProducto)
+	{
+		PersistenceManager pm = pmf.getPersistenceManager();
+		Transaction tx = pm.currentTransaction();
+
+		try{
+			Carro carro = sqlCarritoCliente.darCarroCliente(pm, idCliente);
+			if( carro != null)
+			{
+				long idCarro = carro.getIdCarro();
+				sqlProductos_carro.registrarProductosCarro(pm, idProducto, idCarro);
+			}else
+				solicitarCarro(idCliente);
+		} catch (Exception e ){
+			JOptionPane.showMessageDialog(null, "No se pudo adicionar un producto al carro ");
+		}
+	}
+
+
+	/* ****************************************************************
+	 * 			MÃ©todos para manejar Solicitud carro de compras
+	 *****************************************************************/
+	// FIXME RF12
+	public Carro solicitarCarro(long idCliente)
+	{
+		PersistenceManager pm = pmf.getPersistenceManager();
+		Transaction tx = pm.currentTransaction();
+		try{
+			tx.begin();
+			long idCarro = nextval();
+			if( sqlProductos_carro.darProductosCarro(pm, idCarro).isEmpty())
+			{
+				sqlCarritoCliente.registrarCarritoCliente(pm, idCliente, idCarro);
+				return sqlCarro.darCarroPorId( pm, idCarro);
+			}
+		}catch(Exception e){
+			JOptionPane.showMessageDialog(null, "No ha sido posible asignarle un carro");
+		}
+
+		return null;
+	}
+
 
 	/**
 	 * Elimina todas las tuplas de todas las tablas de la base de datos de Parranderos

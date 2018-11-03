@@ -1,0 +1,175 @@
+{
+	"title": "Aplicación transaccional de Superandes Uniandes",
+	"frameH": 600,
+	"frameW": 800,
+	"bannerPath": "",
+	"menuBar":
+	[
+		{ "menuTitle": "Bodega",
+		  "options":
+			[
+				{
+					"label": "Adicionar",
+					"event": "adicionarBodega"
+				},
+				{
+					"label": "Listar",
+					"event": "listarBodega"
+				},
+				{
+					"label": "Borrar por Id",
+					"event": "eliminarBodegaPorId"
+				},
+				{
+					"label": "Buscar por Id",
+					"event": "buscarBodegaPorId"
+				}
+			]
+		},
+		{ "menuTitle": "Cliente",
+		  "options":
+			[
+				{
+					"label": "Adicionar",
+					"event": "adicionarCliente"
+				},
+				{
+					"label": "Listar",
+					"event": "listarCliente"
+				},
+				{
+					"label": "Borrar por Id",
+					"event": "eliminarClientePorId"
+				},
+				{
+					"label": "Buscar por Id",
+					"event": "buscarClientePorId"
+				}
+			]
+		},
+		{ "menuTitle": "Estante",
+		  "options":
+			[
+				{
+					"label": "Adicionar",
+					"event": "adicionarEstante"
+				},
+				{
+					"label": "Listar",
+					"event": "listarEstante"
+				},
+				{
+					"label": "Borrar por Id",
+					"event": "eliminarEstantePorId"
+				},
+				{
+					"label": "Buscar por Id",
+					"event": "buscarEstantePorId"
+				}
+			]
+		},
+				{ "menuTitle": "Pedido",
+		  "options":
+			[
+				{
+					"label": "Adicionar",
+					"event": "adicionarPedido"
+				},
+				{
+					"label": "Listar",
+					"event": "listarPedido"
+				},
+				{
+					"label": "Borrar por Id",
+					"event": "eliminarPedidoPorId"
+				},
+				{
+					"label": "Buscar por Id",
+					"event": "buscarPedidoPorId"
+				}
+			]
+		},
+				{ "menuTitle": "Producto",
+		  "options":
+			[
+				{
+					"label": "Adicionar",
+					"event": "adicionarProducto"
+				},
+				{
+					"label": "Listar",
+					"event": "listarProducto"
+				},
+				{
+					"label": "Borrar por Id",
+					"event": "eliminarProductoPorId"
+				},
+				{
+					"label": "Buscar por Id",
+					"event": "buscarProductoPorId"
+				}
+			]
+		},
+		{ "menuTitle": "Mantenimiento",
+		  "options":
+			[
+				{
+					"label": "Mostrar log Superandes",
+					"event": "mostrarLogSuperandes"
+				},
+				{
+					"label": "Limpiar log de superandes",
+					"event": "limpiarLogSuperandes"
+				},
+				{
+					"label": "Limpiar log de datanucleus",
+					"event": "limpiarLogDatanucleus"
+				},
+				{
+					"label": "Limpiar Base de Datos",
+					"event": "limpiarBD"
+				}
+			]
+		},		
+		{ "menuTitle": "Documentación",
+		  "options":
+			[
+				{
+					"label": "Presentación general",
+					"event": "mostrarPresentacionGeneral"
+				},
+				{
+					"label": "Modelo conceptual",
+					"event": "mostrarModeloConceptual"
+				},
+				{
+					"label": "Esquema de la BD",
+					"event": "mostrarEsquemaBD"
+				},
+				{
+					"label": "Script creación de la BD",
+					"event": "mostrarScriptBD"
+				},
+				{
+					"label": "Arquitectura de referencia",
+					"event": "mostrarArqRef"
+				},
+				{
+					"label": "Javadoc Parranderos",
+					"event": "mostrarJavadoc"
+				}
+			]
+		},		
+		{ "menuTitle": "Acerca de ...",
+		  "options":
+			[
+				{
+					"label": "Acerca de ...",
+					"event": "acercaDe"
+				}
+			]
+		}		
+		
+	]
+}
+	

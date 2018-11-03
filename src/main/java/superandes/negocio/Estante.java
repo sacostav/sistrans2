@@ -47,7 +47,7 @@ public class Estante implements VOEstante{
 	}
 	
 	//--------------------------------- Métodos -------------------------------------//
-	@Override
+	
 	public int getNivelAbastecimiento() {
 		// TODO Auto-generated method stub
 		return nivelAbastecimiento;
@@ -58,7 +58,7 @@ public class Estante implements VOEstante{
 		this.nivelAbastecimiento = nivel;
 	}
 
-	@Override
+	
 	public String getIdSucursal() {
 		// TODO Auto-generated method stub
 		return idSucursal;
@@ -71,7 +71,7 @@ public class Estante implements VOEstante{
 
 	
 	
-	@Override
+	
 	public double getPeso() {
 		// TODO Auto-generated method stub
 		return peso;
@@ -82,7 +82,7 @@ public class Estante implements VOEstante{
 		this.peso = peso;
 	}
 
-	@Override
+	
 	public double getVolumen() {
 		// TODO Auto-generated method stub
 		return volumen;
@@ -93,7 +93,7 @@ public class Estante implements VOEstante{
 		this.volumen = volumen;
 	}
 
-	@Override
+	
 	public String getCategoria() {
 		// TODO Auto-generated method stub
 		return categoria;
@@ -105,7 +105,7 @@ public class Estante implements VOEstante{
 	}
 
 	
-	@Override 
+	 
 	
 	public long getIdEstante() {
 		return idEstante;

@@ -548,10 +548,10 @@ public class Superandes {
 	 * Metodos para manejar los ventas
 	 ***************************************************/
 
-	public Venta adicionarVenta(long id, double total, long idCliente)
+	public Venta adicionarVenta(long id, double total, long idCliente, String idSucursal)
 	{
 		log.info("Adicionando venta " + id);
-		Venta venta = ps.adicionarVenta(id, total, idCliente);
+		Venta venta = ps.adicionarVenta(id, total, idCliente, idSucursal);
 		log.info("Adicionando venta: " + venta);
 		return venta;
 	}

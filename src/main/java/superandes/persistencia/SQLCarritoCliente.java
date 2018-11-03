@@ -3,6 +3,8 @@ package superandes.persistencia;
 import javax.jdo.PersistenceManager;
 import javax.jdo.Query;
 
+import superandes.negocio.Carro;
+
 public class SQLCarritoCliente {
 	
 	/* ****************************************************************
@@ -40,6 +42,13 @@ public class SQLCarritoCliente {
 		Query q = pm.newQuery(SQL, "INSERT INTO " + pp.darTablaCarritoCliente() + "(idCliente, idCarro) values (?,?)");
 		q.setParameters(idCliente, idCarro);
 		return (Long) q.executeUnique();
+	}
+	
+	public Carro darCarroCliente( PersistenceManager pm, long idCliente)
+	{
+		Query q = pm.newQuery(SQL, "SELECT * FROM " + pp.darTablaCarritoCliente() + " WHERE idCliente = ?");
+		q.setParameters(idCliente);
+		return (Carro) q.executeUnique();
 	}
 
 

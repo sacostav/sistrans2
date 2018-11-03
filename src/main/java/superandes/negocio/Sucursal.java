@@ -37,7 +37,7 @@ public class Sucursal implements VOSucursal{
 	}
 	
 	//--------------------------------- Métodos -------------------------------------//
-	@Override
+	
 	public String getIdSucursal() {
 		// TODO Auto-generated method stub
 		return idSucursal;
@@ -47,7 +47,7 @@ public class Sucursal implements VOSucursal{
 		
 		idSucursal = ids;
 	}
-	@Override
+	
 	public double getTamañoInstalacion() {
 		// TODO Auto-generated method stub
 		return tamanioInstalacion;
@@ -59,7 +59,7 @@ public class Sucursal implements VOSucursal{
 
 
 	
-	@Override
+	
 	public String getClave() {
 		// TODO Auto-generated method stub
 		return clave;
@@ -68,7 +68,7 @@ public class Sucursal implements VOSucursal{
 	public void setClave(String clave) {
 	     this.clave = clave;
 	}
-	@Override
+	
 	public String toString() {
 		return "Sucursal [idSucursal=" + idSucursal + ", tamañoInstalacion=" + tamanioInstalacion + ", nivelReorden=, idProveedores=" +"idSupermercado=]";
 		

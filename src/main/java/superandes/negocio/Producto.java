@@ -121,7 +121,7 @@ public class Producto implements VOProducto {
 		this.idProducto = idProducto;
 	}
 	
-	@Override
+	
 	public String getNombre() {
 		// TODO Auto-generated method stub
 		return nombre;
@@ -132,7 +132,7 @@ public class Producto implements VOProducto {
 		this.nombre = nombre;
 	}
 
-	@Override
+	
 	public String getMarca() {
 		// TODO Auto-generated method stub
 		return marca;
@@ -143,7 +143,7 @@ public class Producto implements VOProducto {
 		this.marca = marca;
 	}
 	
-	@Override
+	
 	public double getPrecioUnitario() {
 		// TODO Auto-generated method stub
 		return precioUnitario;
@@ -154,7 +154,7 @@ public class Producto implements VOProducto {
 		this.precioUnitario = precio;
 	}
 	
-	@Override
+	
 	public double getPrecioUnidadMedida() {
 		// TODO Auto-generated method stub
 		return precioUnidadMedida;
@@ -165,7 +165,7 @@ public class Producto implements VOProducto {
 		this.precioUnidadMedida = precio;
 	}
 	
-	@Override
+	
 	public double getVolumenEmpaque() {
 		// TODO Auto-generated method stub
 		return volumenEmpaque;
@@ -176,7 +176,7 @@ public class Producto implements VOProducto {
 		this.volumenEmpaque = volumen;
 	}
 	
-	@Override
+	
 	public double getPesoEmpaque() {
 		// TODO Auto-generated method stub
 		return pesoEmpaque;
@@ -187,7 +187,7 @@ public class Producto implements VOProducto {
 		this.pesoEmpaque = peso;
 	}
 
-	@Override
+	
 	public String getCodigoBarras() {
 		// TODO Auto-generated method stub
 		return codigoBarras;
@@ -198,7 +198,7 @@ public class Producto implements VOProducto {
 		this.codigoBarras = codigo;
 	}
 	
-	@Override
+	
 	public Date getFechaVencimiento() {
 		// TODO Auto-generated method stub
 		return fechaVencimiento;
@@ -220,7 +220,7 @@ public class Producto implements VOProducto {
 		this.nivelReorden = nivel;
 	}
 	
-	@Override
+	
 	public double getPrecioProveedor() {
 		return precioProveedor;
 	}
@@ -228,7 +228,7 @@ public class Producto implements VOProducto {
 	public void setPrecioProveedor(double prec) {
 		precioProveedor = prec;
 	}
-	@Override
+	
 	public String toString()
 	{
 		return "Producto [ idProducto =" + idProducto + "nombre =" + nombre + "marca" + "precio unitario" + precioUnitario + "precio unidad" + precioUnidadMedida + "unidad medida" + unidadMed + "volumen del empaque" + volumenEmpaque + "peso empaque" + pesoEmpaque

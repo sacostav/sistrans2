@@ -17,12 +17,12 @@ public class productosEstantes implements VOProductosEstantes{
 		idEstante = idEst;
 	}
 	
-	@Override 
+	 
 	public long getIdProducto() {
 		return idProducto;
 	}
 	
-	@Override
+	
 	public long getIdEstante() {
 		return idEstante;
 	}

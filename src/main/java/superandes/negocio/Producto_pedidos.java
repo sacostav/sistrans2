@@ -15,12 +15,11 @@ public class Producto_pedidos implements VOProducto_pedidos {
 		idPedido = idPed;
 	}
 	
-	@Override 
+	 
 	public long getIdProducto() {
 		return idProducto;
 	}
 	
-	@Override
 	public long getIdPedido(){
 		return idPedido;
 	}

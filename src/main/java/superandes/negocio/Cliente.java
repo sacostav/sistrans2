@@ -71,7 +71,7 @@ public class Cliente implements VOCliente {
 	}
 	
 	//--------------------------------- Métodos -------------------------------------//
-	@Override
+	
 	public int getDocumento() {
 		// TODO Auto-generated method stub
 		return documentoIdentificacion;
@@ -82,7 +82,7 @@ public class Cliente implements VOCliente {
 		this.documentoIdentificacion = id;
 	}
 	
-	@Override
+	
 	public int getNIT() {
 		// TODO Auto-generated method stub
 		return NIT;
@@ -93,7 +93,7 @@ public class Cliente implements VOCliente {
 		this.NIT = nit;
 	}
 	
-	@Override
+	
 	public String getNombre() {
 		// TODO Auto-generated method stub
 		return nombre;
@@ -104,7 +104,7 @@ public class Cliente implements VOCliente {
 		this.nombre = nombre;
 	}
 	
-	@Override
+	
 	public String getCorreo() {
 		// TODO Auto-generated method stub
 		return correo;
@@ -115,7 +115,7 @@ public class Cliente implements VOCliente {
 		this.correo = correo;
 	}
 	
-	@Override
+	
 	public String getDireccion() {
 		// TODO Auto-generated method stub
 		return direccion;
@@ -126,7 +126,7 @@ public class Cliente implements VOCliente {
 		this.direccion = direccion;
 	}
 	
-	@Override
+	
 	public String getTipoCliente() {
 		// TODO Auto-generated method stub
 		return tipoCliente;
@@ -138,7 +138,7 @@ public class Cliente implements VOCliente {
 		this.tipoCliente = tipoCliente;
 	}
 
-	@Override
+	
 	public long getId() {
 		// TODO Auto-generated method stub
 		return id;

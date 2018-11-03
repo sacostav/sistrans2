@@ -1,11 +1,13 @@
 package superandes.persistencia;
 
+import java.util.LinkedList;
 import java.util.List;
 
 import javax.jdo.PersistenceManager;
 import javax.jdo.Query;
 
 import superandes.negocio.Carro;
+import superandes.negocio.Producto;
 
 public class SQLProductos_Carro {
 	
@@ -46,17 +48,24 @@ public class SQLProductos_Carro {
 		return (Long) q.executeUnique();
 	}
 
-	public long darProductosCarro(PersistenceManager pm, long idCarro)
+	public List<Producto> darProductosCarro(PersistenceManager pm, long idCarro)
 	{
 		Query q = pm.newQuery(SQL, "SELECT idProducto FROM" + pp.darTablaProductosCarro() + "WHERE idCarro = ?");
 		q.setParameters(idCarro);
-		return (Long) q.executeUnique();
+		return  q.executeResultList();
 	}
 	
 	public void vaciarCarrito( PersistenceManager pm, long idCarro)
 	{
 		Query q = pm.newQuery(SQL, "DELETE FROM " + pp.darTablaProductosCarro() + "WHERE idCarro =?");
 		q.setParameters(idCarro);
+	}
+	
+	public long eliminarProductoCarrito( PersistenceManager pm, long idProducto)
+	{
+		Query q = pm.newQuery(SQL, "DELTE FROM" + pp.darTablaProductosCarro() + "WHERE idProducto = ?");
+		q.setParameters(idProducto);
+		return (Long) q.executeUnique();
 	}
 
 }

@@ -15,12 +15,12 @@ private long idProducto, idPromocion;
 		idPromocion = idProm;
 	}
 	
-	@Override 
+	 
 	public long getIdProducto() {
 		return idProducto;
 	}
 	
-	@Override
+	
 	public long getIdPromocion(){
 		return idPromocion;
 	}

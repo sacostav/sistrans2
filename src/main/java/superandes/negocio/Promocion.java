@@ -54,7 +54,7 @@ public class Promocion implements VOPromocion {
 		fechaInicio = pInicio;
 		fechaFin = pFin;
 	}
-	@Override
+	
 	public long getIdPromocion() {
 		// TODO Auto-generated method stub
 		return idPromocion;
@@ -65,7 +65,7 @@ public class Promocion implements VOPromocion {
 		this.idPromocion = idPromocionx;
 	}
 	
-	@Override
+	
 	public String getTipoPromocion() {
 		// TODO Auto-generated method stub
 		return null;
@@ -79,7 +79,7 @@ public class Promocion implements VOPromocion {
 	}
 	
 	
-	@Override 
+	 
 	public Date getFechaInicio() {
 		return fechaInicio;
 	}
@@ -88,7 +88,7 @@ public class Promocion implements VOPromocion {
 		fechaInicio = p;
 	}
 	
-	@Override 
+	 
 	public Date getFechaFin() {
 		return fechaFin;
 	}
@@ -96,7 +96,7 @@ public class Promocion implements VOPromocion {
 	public void setFechaFin(Date p) {
 		fechaFin = p;
 	}
-	@Override
+	
 	public String toString() {
 		return "Promocion [ id =" + idPromocion +" tipoPromocion" + tipoPromocion + "]";
 	}
