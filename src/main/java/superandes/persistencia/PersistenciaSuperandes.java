@@ -437,7 +437,7 @@ public class PersistenciaSuperandes {
 
 
 	// RF2
-	public Producto adicionarProducto(String nombre, String marca, double precioUnitario, double precioUnidadMedida, String unidadMed, double volumenEmpaque, double pesoEmpaque, String codigoBarras, Date fechaVencimiento, int nivelReorden, double precioProveedor, long idProveedor)
+	public Producto adicionarProducto(String nombre, String marca, double precioUnitario, double precioUnidadMedida, String unidadMed, double volumenEmpaque, double pesoEmpaque, String codigoBarras, Date fechaVencimiento, int nivelReorden, double precioProveedor, long idProveedor, long idBodega)
 	{
 		PersistenceManager pm = pmf.getPersistenceManager();
 		Transaction tx=pm.currentTransaction();
@@ -447,8 +447,11 @@ public class PersistenciaSuperandes {
 			long idProducto = nextval ();
 			long tuplasInsertadas = sqlProducto.registrarProducto(pm, idProducto, nombre, marca, precioUnitario, precioUnidadMedida, unidadMed, volumenEmpaque, pesoEmpaque, codigoBarras, fechaVencimiento, nivelReorden, precioProveedor, idProveedor);
 			tx.commit();
-
-			log.trace ("Inserción del producto: " +idProducto+ ": " + tuplasInsertadas + " tuplas insertadas");
+			
+			long tuplasInsertadas2 = sqlProductosBodega.registrarProductoEnBodega(pm, idProducto, idBodega);
+            log.trace("Inserción del producto" + idProducto+"-"+idBodega+""+tuplasInsertadas2+"tuplas insertadas");
+			
+			log.trace ("Inserción del productoBodega: " +idProducto+ ": " + tuplasInsertadas + " tuplas insertadas");
 
 			return new Producto (idProducto, nombre, marca, precioUnitario, precioUnidadMedida, unidadMed, volumenEmpaque, pesoEmpaque, codigoBarras, fechaVencimiento, nivelReorden, precioProveedor, idProveedor);
 		}
@@ -469,24 +472,29 @@ public class PersistenciaSuperandes {
 	}
 	
 	
-	//----------------------------------------------------------------
-	// Metodos para manejar la asociacion productosEstante
-	//----------------------------------------------------------------
 	
-	public productosEstantes adicionarProductosEstante(long idProducto, long idEstante)
+	
+	//--------------------------------------------------------
+	// Metodos para manejar la asociacion productos estante
+	//--------------------------------------------------------
+	
+	public Producto adicionarProductoEstante(String nombre, String marca, double precioUnitario, double precioUnidadMedida, String unidadMed, double volumenEmpaque, double pesoEmpaque, String codigoBarras, Date fechaVencimiento, int nivelReorden, double precioProveedor, long idProveedor, long idBodega)
 	{
 		PersistenceManager pm = pmf.getPersistenceManager();
 		Transaction tx=pm.currentTransaction();
 		try
 		{
 			tx.begin();
-			long idCliente = nextval ();
-			long tuplasInsertadas = sqlProductosEstante.adicionarProductosEstante(pm, idEstante, idProducto);
+			long idProducto = nextval ();
+			long tuplasInsertadas = sqlProducto.registrarProducto(pm, idProducto, nombre, marca, precioUnitario, precioUnidadMedida, unidadMed, volumenEmpaque, pesoEmpaque, codigoBarras, fechaVencimiento, nivelReorden, precioProveedor, idProveedor);
 			tx.commit();
+			
+			long tuplasInsertadas2 = sqlProductosBodega.registrarProductoEnBodega(pm, idProducto, idBodega);
+            log.trace("Inserción del producto" + idProducto+"-"+idBodega+""+tuplasInsertadas2+"tuplas insertadas");
+			
+			log.trace ("Inserción del productoBodega: " +idProducto+ ": " + tuplasInsertadas + " tuplas insertadas");
 
-			log.trace ("Inserción de cliente: " + idProducto+"-"+ idEstante+ ": " + tuplasInsertadas + " tuplas insertadas");
-
-			return new productosEstantes(idProducto, idEstante);
+			return new Producto (idProducto, nombre, marca, precioUnitario, precioUnidadMedida, unidadMed, volumenEmpaque, pesoEmpaque, codigoBarras, fechaVencimiento, nivelReorden, precioProveedor, idProveedor);
 		}
 		catch (Exception e)
 		{
@@ -504,9 +512,6 @@ public class PersistenciaSuperandes {
 		}
 	}
 	
-	//--------------------------------------------------------
-	// Metodos para manejar la asociacion productos bodega
-	//--------------------------------------------------------
 	
 	
 	

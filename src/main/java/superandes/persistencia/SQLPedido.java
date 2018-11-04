@@ -39,6 +39,26 @@ public class SQLPedido {
 		q.setParameters(pFechaLlegada, idPedido);
 		return (long) q.executeUnique();
 	}
+	
+	// FIXME RFC5 
+	
+	public List<Pedido> pedidosSuperAndes(PersistenceManager pm){
+		Query q = pm.newQuery(SQL, "SELECT * FROM PEDIDO");
+		return (List<Pedido>)q.executeResultList();
+
+	}
+	
+	// FIXME RFC5B
+	
+	public List<Pedido> pedidosSuperAndesProveedor(PersistenceManager pm, long idProveedor)
+	{
+		Query q = pm.newQuery(SQL, "SELECT * FROM PEDIDO WHERE IDPROVEEDOR = ?");
+		q.setParameters(idProveedor);
+		return (List<Pedido>)q.executeResultList();
+		
+	}
+	
+	
 
 }
 
