@@ -38,7 +38,7 @@ public class PersistenciaSuperandes {
 	 * 			Constantes
 	 *****************************************************************/
 	/**
-	 * Logger para escribir la traza de la ejecución
+	 * Logger para escribir la traza de la ejecuciÃ³n
 	 */
 	private static Logger log = Logger.getLogger(PersistenciaSuperandes.class.getName());
 
@@ -90,11 +90,11 @@ public class PersistenciaSuperandes {
 	private SQLCarritoCliente sqlCarritoCliente;
 
 	/* ****************************************************************
-	 * 			Métodos del MANEJADOR DE PERSISTENCIA
+	 * 			MÃ©todos del MANEJADOR DE PERSISTENCIA
 	 *****************************************************************/
 
 	/**
-	 * Constructor privado con valores por defecto - Patrón SINGLETON
+	 * Constructor privado con valores por defecto - PatrÃ³n SINGLETON
 	 */
 
 	public PersistenciaSuperandes( ) {
@@ -127,7 +127,7 @@ public class PersistenciaSuperandes {
 
 	private PersistenciaSuperandes(JsonObject tableConfig)
 	{
-		System.out.println("Aqu� llego");
+		System.out.println("Aquí llego");
 		crearClasesSQL();
 		tablas = leerNombreTablas(tableConfig);
 		//
@@ -136,7 +136,7 @@ public class PersistenciaSuperandes {
 		//		System.out.println("la unidad es: " + unidadPersistencia);
 		//		log.trace ("Accediendo unidad de persistencia: " + unidadPersistencia);
 		pmf = JDOHelper.getPersistenceManagerFactory ("Superandes");
-		System.out.println("Aqu� tambi�n");
+		System.out.println("Aquí también");
 	}
 	public static PersistenciaSuperandes getInstance() {
 
@@ -295,7 +295,7 @@ public class PersistenciaSuperandes {
 	}
 
 	/* ****************************************************************
-	 * 			Métodos para manejar los BODEGA
+	 * 			MÃ©todos para manejar los BODEGA
 	 *****************************************************************/
 	public Bodega adicionarBodega(String categoria, double peso, double volumen, String idSucursal, double nivelAbastecimiento)
 	{
@@ -307,7 +307,7 @@ public class PersistenciaSuperandes {
 		long tuplasInsertadas = sqlBodega.adicionarBodega(pm, idBodega, peso, volumen, categoria, idSucursal,  nivelAbastecimiento);
 		tx.commit();
 
-		log.trace ("Inserción de bodega: " + categoria + ": " + tuplasInsertadas + " tuplas insertadas");
+		log.trace ("InserciÃ³n de bodega: " + categoria + ": " + tuplasInsertadas + " tuplas insertadas");
 
 		return new Bodega(idBodega,peso, volumen, categoria,idSucursal, nivelAbastecimiento);
 		}
@@ -342,7 +342,7 @@ public class PersistenciaSuperandes {
 	}
 
 	/* ****************************************************************
-	 * 			Métodos para manejar los CLIENTES
+	 * 			MÃ©todos para manejar los CLIENTES
 	 *****************************************************************/
 
 
@@ -420,7 +420,7 @@ public class PersistenciaSuperandes {
 			long tuplasInsertadas = sqlEstante.adicionarEstante(pm,idEstante, nivelAbastecimiento,volumen, peso, categoria, idSucursal);
 			tx.commit();
 
-			log.trace ("Inserción del estante: " + categoria+ "-"+idSucursal+ ": " + tuplasInsertadas + " tuplas insertadas");
+			log.trace ("InserciÃ³n del estante: " + categoria+ "-"+idSucursal+ ": " + tuplasInsertadas + " tuplas insertadas");
 
 			return new Estante(idEstante, nivelAbastecimiento,volumen, peso, categoria, idSucursal);
 		}
@@ -467,7 +467,7 @@ public class PersistenciaSuperandes {
 
 
 	/* ****************************************************************
-	 * 			Métodos para manejar los PEDIDOS
+	 * 			MÃ©todos para manejar los PEDIDOS
 	 *****************************************************************/
 
 	// RF9
@@ -483,7 +483,7 @@ public class PersistenciaSuperandes {
 			long tuplasInsertadas = sqlPedido.registrarPedido(pm, idPedido, fechaPedido, fechaLlegada, idSucursal, idProveedor);
 			tx.commit();
 
-			log.trace ("Inserción del pedido: " +idPedido+ ": " + tuplasInsertadas + " tuplas insertadas");
+			log.trace ("InserciÃ³n del pedido: " +idPedido+ ": " + tuplasInsertadas + " tuplas insertadas");
 
 			return new Pedido (idPedido, fechaPedido, fechaLlegada, Pedido.ENTREGADO, idSucursal, idProveedor);
 
@@ -531,7 +531,7 @@ public class PersistenciaSuperandes {
 	 *****************************************************************/
 
 	// RF2
-	public Producto adicionarProducto(String nombre, String marca, double precioUnitario, double precioUnidadMedida, String unidadMed, double volumenEmpaque, double pesoEmpaque, String codigoBarras, Date fechaVencimiento, int nivelReorden, double precioProveedor, long idProveedor)
+	public Producto adicionarProducto(String nombre, String marca, double precioUnitario, double precioUnidadMedida, String unidadMed, double volumenEmpaque, double pesoEmpaque, String codigoBarras, Date fechaVencimiento, int nivelReorden, double precioProveedor, long idProveedor, long idBodega)
 	{
 		PersistenceManager pm = pmf.getPersistenceManager();
 		Transaction tx=pm.currentTransaction();
@@ -541,8 +541,14 @@ public class PersistenciaSuperandes {
 			long idProducto = nextval ();
 			long tuplasInsertadas = sqlProducto.registrarProducto(pm, idProducto, nombre, marca, precioUnitario, precioUnidadMedida, unidadMed, volumenEmpaque, pesoEmpaque, codigoBarras, fechaVencimiento, nivelReorden, precioProveedor, idProveedor);
 			tx.commit();
+			
+			long tuplasInsertadas2 = sqlProductosBodega.registrarProductoEnBodega(pm, idProducto, idBodega);
+            log.trace("Inserción del producto" + idProducto+"-"+idBodega+""+tuplasInsertadas2+"tuplas insertadas");
+			
+			log.trace ("Inserción del productoBodega: " +idProducto+ ": " + tuplasInsertadas + " tuplas insertadas");
 
 			log.trace ("Insercion del producto: " +idProducto+ ": " + tuplasInsertadas + " tuplas insertadas");
+
 
 			return new Producto (idProducto, nombre, marca, precioUnitario, precioUnidadMedida, unidadMed, volumenEmpaque, pesoEmpaque, codigoBarras, fechaVencimiento, nivelReorden, precioProveedor, idProveedor);
 		}
@@ -562,21 +568,46 @@ public class PersistenciaSuperandes {
 		}
 	}
 
+	
+	
+	
+	
+	//--------------------------------------------------------
+	// Metodos para manejar la asociacion productos estante
+	//--------------------------------------------------------
+	
+	public Producto adicionarProductoEstante(String nombre, String marca, double precioUnitario, double precioUnidadMedida, String unidadMed, double volumenEmpaque, double pesoEmpaque, String codigoBarras, Date fechaVencimiento, int nivelReorden, double precioProveedor, long idProveedor, long idBodega)
+
+
 	public Producto darProductoId(long id) {
 		return sqlProducto.darProductoId(pmf.getPersistenceManager(), id);
 	}
 
 	public List<Long> darIdProductos(int nit)
+
 	{
 		PersistenceManager pm = pmf.getPersistenceManager();
 		Transaction tx=pm.currentTransaction();
 		try
 		{
 			tx.begin();
-			List<Long> resp = sqlProveedor.darIdProductos(pm, nit);
-			tx.commit();
 
-			return resp;
+			long idProducto = nextval ();
+			long tuplasInsertadas = sqlProducto.registrarProducto(pm, idProducto, nombre, marca, precioUnitario, precioUnidadMedida, unidadMed, volumenEmpaque, pesoEmpaque, codigoBarras, fechaVencimiento, nivelReorden, precioProveedor, idProveedor);
+
+			List<Long> resp = sqlProveedor.darIdProductos(pm, nit);
+
+			tx.commit();
+			
+			long tuplasInsertadas2 = sqlProductosBodega.registrarProductoEnBodega(pm, idProducto, idBodega);
+            log.trace("Inserción del producto" + idProducto+"-"+idBodega+""+tuplasInsertadas2+"tuplas insertadas");
+			
+			log.trace ("Inserción del productoBodega: " +idProducto+ ": " + tuplasInsertadas + " tuplas insertadas");
+
+
+			return new Producto (idProducto, nombre, marca, precioUnitario, precioUnidadMedida, unidadMed, volumenEmpaque, pesoEmpaque, codigoBarras, fechaVencimiento, nivelReorden, precioProveedor, idProveedor);
+
+
 		}
 		catch (Exception e)
 		{
@@ -593,6 +624,7 @@ public class PersistenciaSuperandes {
 			pm.close();
 		}
 	}
+
 
 	public long eliminarProductoId(long id)
 	{
@@ -619,7 +651,7 @@ public class PersistenciaSuperandes {
 			long tuplasInsertadas = sqlProductosEstante.adicionarProductosEstante(pm, idEstante, idProducto);
 			tx.commit();
 
-			log.trace ("Inserción de cliente: " + idProducto+"-"+ idEstante+ ": " + tuplasInsertadas + " tuplas insertadas");
+			log.trace ("InserciÃ³n de cliente: " + idProducto+"-"+ idEstante+ ": " + tuplasInsertadas + " tuplas insertadas");
 
 			return new productosEstantes(idProducto, idEstante);
 		}
@@ -643,7 +675,7 @@ public class PersistenciaSuperandes {
 
 
 	/* ****************************************************************
-	 * 			Métodos para manejar los PROMOCION
+	 * 			MÃ©todos para manejar los PROMOCION
 	 *****************************************************************/
 
 
@@ -659,7 +691,7 @@ public class PersistenciaSuperandes {
 			long tuplasInsertadas = sqlPromocion.registrarPromocion(pm, idPromocion, tipoPromocion, fechaFin, fechaInicio);
 			tx.commit();
 
-			log.trace ("Inserción del producto: " +idPromocion + ": " + tuplasInsertadas + " tuplas insertadas");
+			log.trace ("InserciÃ³n del producto: " +idPromocion + ": " + tuplasInsertadas + " tuplas insertadas");
 
 			return new Promocion(idPromocion, tipoPromocion, fechaFin, fechaInicio);
 		}
@@ -695,7 +727,7 @@ public class PersistenciaSuperandes {
 
 
 	/* ****************************************************************
-	 * 			Métodos para manejar los PROVEEDOR
+	 * 			MÃ©todos para manejar los PROVEEDOR
 	 *****************************************************************/
 	public Proveedor adicionarProveedor(int nit,String nombre, double calificacion)
 	{
@@ -707,7 +739,7 @@ public class PersistenciaSuperandes {
 			long tuplasInsertadas = sqlProveedor.adicionarProveedor(pm, nit, nombre, calificacion);
 			tx.commit();
 
-			log.trace ("Inserción del producto: " +nit + ": " + tuplasInsertadas + " tuplas insertadas");
+			log.trace ("InserciÃ³n del producto: " +nit + ": " + tuplasInsertadas + " tuplas insertadas");
 
 			return new Proveedor(nit, nombre, calificacion);
 		}
@@ -813,7 +845,7 @@ public class PersistenciaSuperandes {
 
 
 	/* ****************************************************************
-	 * 			Métodos para manejar los SUCURSAL
+	 * 			MÃ©todos para manejar los SUCURSAL
 	 *****************************************************************/
 
 	public Sucursal adicionarSucursal(String id, double tamanio, String clave )
@@ -825,7 +857,7 @@ public class PersistenciaSuperandes {
 			tx.begin();
 			long tuplasInsertadas = sqlSucursal.adicionarSucursal(pm, id, tamanio, clave);
 			tx.commit();
-			log.trace ("Inserción de la venta: " +id+ ": " + tuplasInsertadas + " tuplas insertadas");
+			log.trace ("InserciÃ³n de la venta: " +id+ ": " + tuplasInsertadas + " tuplas insertadas");
 
 			return new Sucursal(id, tamanio, clave);
 		}
@@ -930,7 +962,7 @@ public class PersistenciaSuperandes {
 	}
 
 	/* ****************************************************************
-	 * 			Métodos para manejar las VENTAS
+	 * 			MÃ©todos para manejar las VENTAS
 	 *****************************************************************/
 	public Venta adicionarVenta(long id, double total, long idCliente, String idSucursal )
 	{
@@ -941,7 +973,7 @@ public class PersistenciaSuperandes {
 			tx.begin();
 			long tuplasInsertadas = sqlVenta.adicionarVenta(pm, id, total, idCliente, idSucursal);
 			tx.commit();
-			log.trace ("Inserción de la venta: " +id+ ": " + tuplasInsertadas + " tuplas insertadas");
+			log.trace ("InserciÃ³n de la venta: " +id+ ": " + tuplasInsertadas + " tuplas insertadas");
 
 			return new Venta(id, total, idCliente, idSucursal);
 		}
@@ -1049,12 +1081,12 @@ public class PersistenciaSuperandes {
 	//************************Asociaciones******************************
 	//******************************************************************//
 	/**
-	 * Método que inserta, de manera transaccional, una tupla en la tabla BEBEDOR
-	 * Adiciona entradas al log de la aplicación
+	 * MÃ©todo que inserta, de manera transaccional, una tupla en la tabla BEBEDOR
+	 * Adiciona entradas al log de la aplicaciÃ³n
 	 * @param nombre - El nombre del bebedor
 	 * @param ciudad - La ciudad del bebedor
 	 * @param presupuesto - El presupuesto del bebedor (ALTO, MEDIO, BAJO)
-	 * @return El objeto BEBEDOR adicionado. null si ocurre alguna Excepción
+	 * @return El objeto BEBEDOR adicionado. null si ocurre alguna ExcepciÃ³n
 	 */
 	public Promocion_producto registrarPromocionProductos()
 	{
@@ -1068,7 +1100,7 @@ public class PersistenciaSuperandes {
 			long tuplasInsertadas = sqlPromocion_producto.registrarPromocionProductos(pm, idProducto, idPromocion);
 			tx.commit();
 
-			log.trace ("Inserción de la promocion: " + idPromocion + ": " + tuplasInsertadas + " tuplas insertadas");
+			log.trace ("InserciÃ³n de la promocion: " + idPromocion + ": " + tuplasInsertadas + " tuplas insertadas");
 
 			return new Promocion_producto(idProducto, idPromocion);
 		}
@@ -1119,12 +1151,12 @@ public class PersistenciaSuperandes {
 	}
 
 	/**
-	 * Método que inserta, de manera transaccional, una tupla en la tabla BEBEDOR
-	 * Adiciona entradas al log de la aplicación
+	 * MÃ©todo que inserta, de manera transaccional, una tupla en la tabla BEBEDOR
+	 * Adiciona entradas al log de la aplicaciÃ³n
 	 * @param nombre - El nombre del bebedor
 	 * @param ciudad - La ciudad del bebedor
 	 * @param presupuesto - El presupuesto del bebedor (ALTO, MEDIO, BAJO)
-	 * @return El objeto BEBEDOR adicionado. null si ocurre alguna Excepción
+	 * @return El objeto BEBEDOR adicionado. null si ocurre alguna ExcepciÃ³n
 	 */
 	public Producto_pedidos registrarProductosPedido()
 	{
@@ -1138,7 +1170,7 @@ public class PersistenciaSuperandes {
 			long tuplasInsertadas = sqlProductos_pedidos.registrarProductosPedidos(pm, idProducto, idPedido);
 			tx.commit();
 
-			log.trace ("Inserción del Estante: " + idPedido + ": " + tuplasInsertadas + " tuplas insertadas");
+			log.trace ("InserciÃ³n del Estante: " + idPedido + ": " + tuplasInsertadas + " tuplas insertadas");
 
 			return new Producto_pedidos(idProducto,idPedido);
 		}
@@ -1190,7 +1222,7 @@ public class PersistenciaSuperandes {
 
 
 	/* ****************************************************************
-	 * 			Métodos para manejar Ventas de productos
+	 * 			MÃ©todos para manejar Ventas de productos
 	 *****************************************************************/
 	public Ventas_productos registrarProductosVentas()
 	{
@@ -1204,7 +1236,7 @@ public class PersistenciaSuperandes {
 			long tuplasInsertadas = sqlVentas_productos.registrarVentasProductos(pm, idVenta, idProducto);
 			tx.commit();
 
-			log.trace ("Inserción del Estante: " + idVenta + ": " + tuplasInsertadas + " tuplas insertadas");
+			log.trace ("InserciÃ³n del Estante: " + idVenta + ": " + tuplasInsertadas + " tuplas insertadas");
 
 			return new Ventas_productos(idVenta, idProducto);
 		}
@@ -1255,7 +1287,7 @@ public class PersistenciaSuperandes {
 	}
 
 	/* ****************************************************************
-	 * 			Métodos para manejar Solicitud carro de compras
+	 * 			MÃ©todos para manejar Solicitud carro de compras
 	 *****************************************************************/
 
 	public void eliminarProductoEstante( long idProducto)
@@ -1316,7 +1348,7 @@ public class PersistenciaSuperandes {
 
 
 	/* ****************************************************************
-	 * 			Métodos para manejar Solicitud carro de compras
+	 * 			MÃ©todos para manejar Solicitud carro de compras
 	 *****************************************************************/
 	// FIXME RF12
 	public Carro solicitarCarro(long idCliente)
@@ -1380,7 +1412,7 @@ public class PersistenciaSuperandes {
 	/**
 	 * Elimina todas las tuplas de todas las tablas de la base de datos de Parranderos
 	 * Crea y ejecuta las sentencias SQL para cada tabla de la base de datos - EL ORDEN ES IMPORTANTE 
-	 * @return Un arreglo con 7 números que indican el número de tuplas borradas en las tablas GUSTAN, SIRVEN, VISITAN, BEBIDA,
+	 * @return Un arreglo con 7 nÃºmeros que indican el nÃºmero de tuplas borradas en las tablas GUSTAN, SIRVEN, VISITAN, BEBIDA,
 	 * TIPOBEBIDA, BEBEDOR y BAR, respectivamente
 	 */
 	public long [] limpiarSuperandes ()
