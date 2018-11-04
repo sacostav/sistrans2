@@ -27,7 +27,7 @@ public class SQLCliente {
 	
 		Query q = pm.newQuery(SQL, "INSERT INTO " + ps.darTablaCliente() + "(id, documentoIdentificacion, NIT, nombre, correo, direccion, tipoCliente) values (?,?,?,?,?,?,?)");
 		q.setParameters(id, documentoIdentificacion,NIT, nombre, correo, direccion, tipoCliente);
-		return (long) q.executeUnique();
+		return (Long) q.executeUnique();
 	}
 	
 	
@@ -48,5 +48,12 @@ public class SQLCliente {
 		Query q = pm.newQuery(SQL, "SELECT * FROM " + ps.darTablaCliente());
 		q.setResultClass(Cliente.class);
 		return (List<Cliente>) q.executeList();
+	}
+	
+	public long eliminarClienteId(PersistenceManager pm, long id)
+	{
+		Query q = pm.newQuery(SQL, "DELETE FROM " + ps.darTablaCliente() + "WHERE idCliente =?");
+		q.setParameters(id);
+		return (Long) q.executeUnique();
 	}
 }

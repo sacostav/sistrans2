@@ -8,6 +8,7 @@ import javax.jdo.PersistenceManager;
 import javax.jdo.Query;
 
 import oracle.net.aso.t;
+import superandes.negocio.Estante;
 import superandes.negocio.Pedido;
 
 public class SQLPedido {
@@ -26,9 +27,9 @@ public class SQLPedido {
 	public long registrarPedido(PersistenceManager pm, long idPedido, Date fechaPedido, Date fechaLlegada, String idSucursal, long idProveedores)
 	{
 		
-		Query q = pm.newQuery(SQL, "INSERT INTO " + ps.darTablaPedido() + "(id, fechaPedido ,fechaLlegada, estadoPedido, idSucursal, idProveedor) values (?,?,?,?,?,?)");
+		Query q = pm.newQuery(SQL, "INSERT INTO " + ps.darTablaPedido() + "(id, fechaPedido ,fechaLlegada, estadoPedido, idSucursal, idProveedor, estado) values (?,?,?,?,?,?)");
 		q.setParameters(idPedido, fechaPedido, fechaLlegada,  Pedido.SOLICITADO, idSucursal, idProveedores);
-		return (long) q.executeUnique();
+		return (Long) q.executeUnique();
 	}
 
 	
@@ -37,7 +38,22 @@ public class SQLPedido {
 
 		Query q = pm.newQuery(SQL, "UPDATE " + ps.darTablaPedido() + "SET fechaLlegada = ?, estadoPedido ="+Pedido.ENTREGADO+ "WHERE idPedido = ?");
 		q.setParameters(pFechaLlegada, idPedido);
-		return (long) q.executeUnique();
+		return (Long) q.executeUnique();
+	}
+	
+	public Pedido darPedidoId(PersistenceManager pm , long id)
+	{
+		Query q = pm.newQuery(SQL, "SELECT * FROM " + ps.darTablaPedido() + "WHERE idPedido = ?");
+		q.setResultClass(Pedido.class);
+		q.setParameters(id);
+		return (Pedido) q.executeUnique();
+	}
+	
+	public List<Pedido> darPedidos(PersistenceManager pm)
+	{
+		Query q = pm.newQuery(SQL, "SELECT * FROM " + ps.darTablaEstante());
+		q.setResultClass(Pedido.class);
+		return q.executeResultList();
 	}
 	
 	// FIXME RFC5 
@@ -60,5 +76,11 @@ public class SQLPedido {
 	
 	
 
+	public long eliminarPedidoId ( PersistenceManager pm, long id)
+	{
+		Query q = pm.newQuery(SQL, "DELETE FROM " + ps.darTablaPedido() + "WHERE idPedido = ?");
+		q.setParameters(id);
+		return (Long) q.executeUnique();
+	}
 }
 

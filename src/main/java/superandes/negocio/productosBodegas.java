@@ -17,7 +17,6 @@ public class productosBodegas implements VOProductosBodegas {
 	}
 
 	
-	@Override
 	public long getIdProducto() {
 		// TODO Auto-generated method stub
 		return idProducto;
@@ -27,7 +26,6 @@ public class productosBodegas implements VOProductosBodegas {
 		this.idProducto = idProducto;
 	}
 
-	@Override
 	public long getIdBodega() {
 		// TODO Auto-generated method stub
 	return idBodega;

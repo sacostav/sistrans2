@@ -21,14 +21,14 @@ public class SQLProductosBodegas {
 	{
 		Query q = pm.newQuery(SQL, "INSERT INTO " + ps.darTablaProductosBodega() + "(idProducto, idBodega) values (?,?)");
 		q.setParameters(idProducto,idBodega);
-		return (long) q.executeUnique();
+		return (Long) q.executeUnique();
 	}
 	
 	public long eliminarProductoEnBodegaPorId (PersistenceManager pm, long idProducto)
 	{
         Query q = pm.newQuery(SQL, "DELETE FROM " + ps.darTablaProductosBodega() + " WHERE idProducto = ?");
         q.setParameters(idProducto);
-        return (long) q.executeUnique();            
+        return (Long) q.executeUnique();            
 	}
 	
 }

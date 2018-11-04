@@ -15,25 +15,27 @@ public class Venta implements VOVenta {
 	
 	private long idCliente;
 	
+	private String idSucursal;
 	
 	public Venta() {
 		idVenta = 0;
 		total = 0;
 		idCliente = 0;
+		idSucursal = "";
 	}
 	
-	public Venta(long idVenta, double total, long idCliente)
+	public Venta(long idVenta, double total, long idCliente, String idSucursal)
 	{
 		this.idVenta = idVenta;
 		this.total = total;
 		this.idCliente = idCliente;
+		this.idSucursal = idSucursal;
 	}
 	
 	//--------------------------------------------------------------------
 	// Metodos
 	//--------------------------------------------------------------------
 	
-	@Override
 	public long getIdVenta() {
 		return idVenta;
 	}
@@ -42,7 +44,6 @@ public class Venta implements VOVenta {
 		this.idVenta = idVenta;
 	}
 		
-	@Override
 	public double getTotal() {
 		return total;
 	}
@@ -52,7 +53,6 @@ public class Venta implements VOVenta {
 	}
 	
 	
-	@Override
 	public long getIdCliente() {
 		return idCliente;
 	}
@@ -60,6 +60,15 @@ public class Venta implements VOVenta {
 	public void setIdCliente(long idCliente) {
 		
           this.idCliente = idCliente;
+	}
+	
+	public String getIdSucursal()
+	{
+		return idSucursal;
+	}
+	
+	public void setIdSucursal(String id){
+		this.idSucursal = id;
 	}
 	
 	

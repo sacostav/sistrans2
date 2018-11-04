@@ -59,7 +59,7 @@ public class SQLBodega {
 		
 		Query q = pm.newQuery(SQL, "INSERT INTO " + pp.darTablaBodega () + "(idBodega, pesoBodega, volumenBodega, categoria, idSucursal, nivelAbastecimiento) values (?, ?, ?, ?, ?,?)");
 		q.setParameters(idBodega, pesoBodega, volumenBodega, categoria,idSucursal, nivelAbastecimiento);
-		return (long) q.executeUnique();
+		return (Long) q.executeUnique();
 	}
 
 
@@ -97,6 +97,19 @@ public class SQLBodega {
 		Query q = pm.newQuery(SQL, "select  count(nombre), producto.codigobarras from "+pp.darTablaProducto()+ " inner join "+pp.darTablaProductosBodega()+" on producto.idproducto = productosbodega.idproducto group by producto.codigobarras");
 		return (List<String>)q.executeList();
 	}
+	
+	/**
+	 * Crea y ejecuta la sentencia SQL para eliminar BEBEDORES de la base de datos de Parranderos, por su nombre
+	 * @param pm - El manejador de persistencia
+	 * @param nombre - El nombre del bebedor
+	 * @return EL número de tuplas eliminadas
+	 */
+	public long eliminarBodega (PersistenceManager pm, long id)
+	{
+        Query q = pm.newQuery(SQL, "DELETE FROM " + pp.darTablaBodega() + " WHERE idBodega = ?");
+        q.setParameters(id);
+        return (Long) q.executeUnique();           
+	} 
  	
 }	
 

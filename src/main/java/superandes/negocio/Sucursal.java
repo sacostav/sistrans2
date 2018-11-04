@@ -17,14 +17,14 @@ public class Sucursal implements VOSucursal{
 	/**
 	 * tamaño instalacion
 	 */
-	private double tamañoInstalacion;
+	private double tamanioInstalacion;
 	
 	private String clave;
 	
 	//---------------------------- Constructor -----------------------------//
 	public Sucursal() {
 		this.idSucursal = "";
-		this.tamañoInstalacion = 0;
+		this.tamanioInstalacion = 0;
 		this.clave = "";
 	}
 
@@ -32,12 +32,12 @@ public class Sucursal implements VOSucursal{
 	public Sucursal(String idSucursal, double tamano,String pclave)
 	{
 		this.idSucursal = idSucursal;
-		this.tamañoInstalacion = tamano;
+		this.tamanioInstalacion = tamano;
 		this.clave = pclave;
 	}
 	
 	//--------------------------------- Métodos -------------------------------------//
-	@Override
+	
 	public String getIdSucursal() {
 		// TODO Auto-generated method stub
 		return idSucursal;
@@ -47,19 +47,19 @@ public class Sucursal implements VOSucursal{
 		
 		idSucursal = ids;
 	}
-	@Override
+	
 	public double getTamañoInstalacion() {
 		// TODO Auto-generated method stub
-		return tamañoInstalacion;
+		return tamanioInstalacion;
 	}
 	
 	public void setTamañoInstalacion(double tam) {
-		tamañoInstalacion = tam;
+		tamanioInstalacion = tam;
 	}
 
 
 	
-	@Override
+	
 	public String getClave() {
 		// TODO Auto-generated method stub
 		return clave;
@@ -68,9 +68,9 @@ public class Sucursal implements VOSucursal{
 	public void setClave(String clave) {
 	     this.clave = clave;
 	}
-	@Override
+	
 	public String toString() {
-		return "Sucursal [idSucursal=" + idSucursal + ", tamañoInstalacion=" + tamañoInstalacion + ", nivelReorden=, idProveedores=" +"idSupermercado=]";
+		return "Sucursal [idSucursal=" + idSucursal + ", tamañoInstalacion=" + tamanioInstalacion + ", nivelReorden=, idProveedores=" +"idSupermercado=]";
 		
 	}
 	

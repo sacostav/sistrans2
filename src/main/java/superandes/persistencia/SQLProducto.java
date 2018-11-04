@@ -25,7 +25,7 @@ public class SQLProducto {
 	{
 		Query q = pm.newQuery(SQL, "INSERT INTO " + ps.darTablaProducto() + "(idProducto, nombre, marca, precioUnitario, precioUnidadMedida, unidadMed, volumenEmpaque, pesoEmpaque, codigoBarras, fechaVencimiento, nivelReorden, precioProveedor) values (?,?,?,?,?,?,?,?,?,?,?)");
 		q.setParameters(idProducto,nombre, marca, precioUnitario, precioUnidadMedida, unidadMed, volumenEmpaque, pesoEmpaque, codigoBarras, fechaVencimiento, nivelReorden, precioProveedor);
-		return (long) q.executeUnique();
+		return (Long) q.executeUnique();
 	}
 	
 	public Producto darProductoId(PersistenceManager pm, long id)
@@ -36,6 +36,7 @@ public class SQLProducto {
 		return (Producto) q.executeUnique();
 	}
 	
+
 	// FIXME RFC4A
 	
 		public List<Producto>productosPrecioEnRango(PersistenceManager pm, int inicial, int fin){
@@ -97,4 +98,19 @@ public class SQLProducto {
 			q.setParameters(Categoria);	
 			return (List<Producto>)q.executeResultList();
 		}
+
+	public List<Producto> darProductos(PersistenceManager pm)
+	{
+		Query q = pm.newQuery(SQL, "SELECT * FROM " + ps.darTablaProducto());
+		q.setResultClass(Producto.class);
+		return q.executeResultList();
+	}
+	
+	public long eliminarProductoId(PersistenceManager pm, long id)
+	{
+		Query q = pm.newQuery(SQL, "DELETE FROM " + ps.darTablaProducto() + "WHERE idProducto = ?");
+		q.setParameters(id);
+		return (Long) q.executeUnique();
+	}
+
 }

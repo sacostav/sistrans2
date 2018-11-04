@@ -28,7 +28,7 @@ public class SQLEstante {
 		
 		Query q = pm.newQuery(SQL, "INSERT INTO " + ps.darTablaEstante() + "(idEstante, nivelAbastecimiento, volumen, peso, categoria, idSucursal) values (?,?,?,?,?,?)");
 		q.setParameters( idEstante, nivelAbastecimiento, volumen, peso, categoria, idSucursal);
-		return (long) q.executeUnique();
+		return (Long) q.executeUnique();
 	}
 
 
@@ -42,10 +42,34 @@ public class SQLEstante {
 		return (Estante) q.executeUnique();
 	}
 
+	
+	public List<Estante> darEstantes(PersistenceManager pm)
+	{
+		Query q = pm.newQuery(SQL, "SELECT * FROM " + ps.darTablaEstante());
+		q.setResultClass(Estante.class);
+		return q.executeResultList();
+	}
+	
+	public Estante darEstanteId(PersistenceManager pm, long id)
+	{
+		Query q = pm.newQuery(SQL, "SELECT * FROM " + ps.darTablaEstante() + "WHERE idEstante = ?");
+		q.setParameters(id);
+		q.setResultClass(Estante.class);
+		return (Estante)q.executeUnique();
+	}
+
+
 	public List<String> cantidadProductosEnEstante(PersistenceManager pm) {
 
 		Query q = pm.newQuery(SQL, "select  count(nombre), producto.codigobarras from "+ps.darTablaProducto()+ " inner join "+ps.darTablaProductosEstante()+" on producto.idproducto = productosEstante.idproducto group by producto.codigobarras");
 		return (List<String>)q.executeList();
+	}
+	
+	public long eliminarEstanteId(PersistenceManager pm, long id)
+	{
+		Query q = pm.newQuery(SQL, "DELETE FROM " + ps.darTablaEstante() + "WHERE idEstante = ?");
+		q.setParameters(id);
+		return (Long) q.executeUnique();
 	}
 
 

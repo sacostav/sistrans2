@@ -2,6 +2,7 @@ package superandes.persistencia;
 
 import java.util.Date;
 import java.util.LinkedList;
+import java.util.List;
 
 import javax.jdo.PersistenceManager;
 import javax.jdo.Query;
@@ -25,7 +26,7 @@ public class SQLPromocion {
 		{
 			Query q = pm.newQuery(SQL, "INSERT INTO " + ps.darTablaPromocion() + "(idPromocion, tipoPromocion, fechaFin, fechaInicio) values (?,?,?,?)");
 			q.setParameters(idPromocion, tipoPromocion, fechaFin, fechaInicio);
-			return (long) q.executeUnique();
+			return (Long) q.executeUnique();
 		}
 		
 		
@@ -37,6 +38,19 @@ public class SQLPromocion {
 			return (Promocion) q.executeUnique();
 		}
 
+		public List<Promocion> darPromociones(PersistenceManager pm)
+		{
+			Query q = pm.newQuery(SQL, "SELECT * FROM " + ps.darTablaPromocion());
+			q.setResultClass(Promocion.class);
+			return q.executeResultList();
+		}
+		
+		public long eliminarPromocionId (PersistenceManager pm, long id)
+		{
+			Query q = pm.newQuery(SQL, "DELETE FROM " + ps.darTablaPromocion() + "WHERE idPromocion = ?");
+			q.setParameters(id);
+			return (Long) q.executeUnique();
+		}
 		
 		
 }

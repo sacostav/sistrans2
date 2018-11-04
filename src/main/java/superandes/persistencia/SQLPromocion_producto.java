@@ -19,14 +19,14 @@ public class SQLPromocion_producto {
 	{
 		Query q = pm.newQuery(SQL, "INSERT INTO" + ps.darTablaPromocionProducto() + "(idProducto, idPromocion) values (?,?)");
 		q.setParameters(idProducto, idPromocion);
-		return (long) q.executeUnique();
+		return (Long) q.executeUnique();
 	}
 	
 	public long darProductosPromocion(PersistenceManager pm, long idPromocion)
 	{
 		Query q = pm.newQuery(SQL, "SELECT idProducto FROM" + ps.darTablaPromocionProducto() + "WHERE idPromocion = ?");
 		q.setParameters(idPromocion);
-		return (long) q.executeUnique();
+		return (Long) q.executeUnique();
 	}
 
 }

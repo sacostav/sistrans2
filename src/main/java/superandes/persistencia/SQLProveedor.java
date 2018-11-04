@@ -51,11 +51,11 @@ public class SQLProveedor {
 	 * @return El número de tuplas insertadas
 	 */
 
-	public long adicionarProveedor (PersistenceManager pm, int nit, String nombre, double calificacionCalidad, String idSucursal) 
+	public long adicionarProveedor (PersistenceManager pm, int nit, String nombre, double calificacionCalidad ) 
 	{
-		Query q = pm.newQuery(SQL, "INSERT INTO " + pp.darTablaProveedor () + "(NIT, nombre, calificacionCalidad, idSucursal) values (?, ?, ?, ?)");
-		q.setParameters(nit, nombre, calificacionCalidad,idSucursal);
-		return (long) q.executeUnique();
+		Query q = pm.newQuery(SQL, "INSERT INTO " + pp.darTablaProveedor () + "(NIT, nombre, calificacionCalidad, idSucursal) values (?, ?, ?)");
+		q.setParameters(nit, nombre, calificacionCalidad);
+		return (Long) q.executeUnique();
 	}
 
 
@@ -106,14 +106,21 @@ public class SQLProveedor {
 
 		Query q = pm.newQuery(SQL, "SELECT calificacionCalidad FROM "+pp.darTablaProveedor()+"WHERE NIT = ?");
 		q.setParameters(nitP);
-		double num = (double)q.executeUnique();
+		double num = (Double)q.executeUnique();
 
 		num = (num+cal)/2;
 
 		Query s = pm.newQuery(SQL, "UPDATE "+pp.darTablaProveedor()+"SET calificacionCalidad ="+num+" WHERE NIT = ?");
 		q.setParameters(nitP);
 
-		return (long) s.executeUnique();
+		return (Long) s.executeUnique();
 
+	}
+	
+	public long eliminarProveedorId(PersistenceManager pm , long id)
+	{
+		Query q = pm.newQuery(SQL, "DELETE FROM " + pp.darTablaProveedor() + "WHERE idProveedor =?");
+		q.setParameters(id);
+		return (Long) q.executeUnique();
 	}
 }
